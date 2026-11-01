@@ -45,34 +45,56 @@ public sealed partial class SettingsViewModel : ObservableObject
     public string RuntimeInfo => $"{System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription} · {System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture} · {Environment.OSVersion.VersionString}";
 
     // General
-    [ObservableProperty] public partial bool ConfirmBeforeClosing { get; set; }
-    [ObservableProperty] public partial string ScreenshotFolder { get; set; } = "";
+    [ObservableProperty]
+    private bool _confirmBeforeClosing;
+    [ObservableProperty]
+    private string _screenshotFolder = "";
     // Appearance
-    [ObservableProperty] public partial int ThemeIndex { get; set; }
-    [ObservableProperty] public partial bool UseMica { get; set; }
-    [ObservableProperty] public partial bool ReduceAnimations { get; set; }
+    [ObservableProperty]
+    private int _themeIndex;
+    [ObservableProperty]
+    private bool _useMica;
+    [ObservableProperty]
+    private bool _reduceAnimations;
     // Connection
-    [ObservableProperty] public partial bool AutoReconnect { get; set; }
-    [ObservableProperty] public partial bool AutoPair { get; set; }
-    [ObservableProperty] public partial bool EnableWifiDevices { get; set; }
-    [ObservableProperty] public partial string UsbmuxEndpoint { get; set; } = "";
-    [ObservableProperty] public partial double WdaPort { get; set; }
-    [ObservableProperty] public partial double MjpegPort { get; set; }
-    [ObservableProperty] public partial string UxPlayPath { get; set; } = "";
-    [ObservableProperty] public partial string AirPlayName { get; set; } = "";
+    [ObservableProperty]
+    private bool _autoReconnect;
+    [ObservableProperty]
+    private bool _autoPair;
+    [ObservableProperty]
+    private bool _enableWifiDevices;
+    [ObservableProperty]
+    private string _usbmuxEndpoint = "";
+    [ObservableProperty]
+    private double _wdaPort;
+    [ObservableProperty]
+    private double _mjpegPort;
+    [ObservableProperty]
+    private string _uxPlayPath = "";
+    [ObservableProperty]
+    private string _airPlayName = "";
     // Startup
-    [ObservableProperty] public partial bool LaunchAtSignIn { get; set; }
-    [ObservableProperty] public partial bool StartMinimized { get; set; }
-    [ObservableProperty] public partial bool AutoStartMirroring { get; set; }
+    [ObservableProperty]
+    private bool _launchAtSignIn;
+    [ObservableProperty]
+    private bool _startMinimized;
+    [ObservableProperty]
+    private bool _autoStartMirroring;
     // Performance
-    [ObservableProperty] public partial double FrameRate { get; set; }
-    [ObservableProperty] public partial double Quality { get; set; }
-    [ObservableProperty] public partial double Scaling { get; set; }
+    [ObservableProperty]
+    private double _frameRate;
+    [ObservableProperty]
+    private double _quality;
+    [ObservableProperty]
+    private double _scaling;
     // Logging
-    [ObservableProperty] public partial int LogLevelIndex { get; set; }
-    [ObservableProperty] public partial double RetainDays { get; set; }
+    [ObservableProperty]
+    private int _logLevelIndex;
+    [ObservableProperty]
+    private double _retainDays;
 
-    [ObservableProperty] public partial string Message { get; set; } = "";
+    [ObservableProperty]
+    private string _message = "";
 
     private void Load()
     {

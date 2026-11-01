@@ -60,23 +60,35 @@ public sealed partial class MirroringViewModel : ObservableObject
     public IInputForwarder Input => _input;
 
     [ObservableProperty, NotifyCanExecuteChangedFor(nameof(StartCommand))]
-    public partial DeviceItemViewModel? SelectedDevice { get; set; }
+    private DeviceItemViewModel? _selectedDevice;
 
-    [ObservableProperty] public partial int BackendIndex { get; set; }
-    [ObservableProperty] public partial double FrameRate { get; set; }
-    [ObservableProperty] public partial double Quality { get; set; }
-    [ObservableProperty] public partial double ScalingPercent { get; set; }
-    [ObservableProperty] public partial bool IsInputEnabled { get; set; }
+    [ObservableProperty]
+    private int _backendIndex;
+    [ObservableProperty]
+    private double _frameRate;
+    [ObservableProperty]
+    private double _quality;
+    [ObservableProperty]
+    private double _scalingPercent;
+    [ObservableProperty]
+    private bool _isInputEnabled;
 
-    [ObservableProperty] public partial string StateText { get; set; } = "Idle";
-    [ObservableProperty] public partial string StateDetail { get; set; } = "Choose an iPhone and start mirroring.";
-    [ObservableProperty] public partial IndicatorKind Indicator { get; set; }
+    [ObservableProperty]
+    private string _stateText = "Idle";
+    [ObservableProperty]
+    private string _stateDetail = "Choose an iPhone and start mirroring.";
+    [ObservableProperty]
+    private IndicatorKind _indicator;
     [ObservableProperty, NotifyCanExecuteChangedFor(nameof(StartCommand), nameof(StopCommand))]
-    public partial bool IsRunning { get; set; }
-    [ObservableProperty] public partial bool IsStreaming { get; set; }
-    [ObservableProperty] public partial string StatsText { get; set; } = "—";
-    [ObservableProperty] public partial string InputStatusText { get; set; } = "Input not connected";
-    [ObservableProperty] public partial bool InputAvailable { get; set; }
+    private bool _isRunning;
+    [ObservableProperty]
+    private bool _isStreaming;
+    [ObservableProperty]
+    private string _statsText = "—";
+    [ObservableProperty]
+    private string _inputStatusText = "Input not connected";
+    [ObservableProperty]
+    private bool _inputAvailable;
 
     public bool IsAirPlay => BackendIndex == 1;
 

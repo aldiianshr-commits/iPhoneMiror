@@ -37,15 +37,24 @@ public sealed partial class ConnectViewModel : ObservableObject
     public ObservableCollection<DiscoveredItem> NetworkDiscovered { get; } = [];
     public ObservableCollection<DiscoveredItem> BluetoothDiscovered { get; } = [];
 
-    [ObservableProperty] public partial int SelectedMethod { get; set; }
-    [ObservableProperty] public partial string UsbStatus { get; set; } = "Checking Apple Mobile Device Service…";
-    [ObservableProperty] public partial string WifiStatus { get; set; } = "Wi-Fi discovery is off.";
-    [ObservableProperty] public partial string BluetoothStatus { get; set; } = "Bluetooth status not checked.";
-    [ObservableProperty] public partial string PairingStatus { get; set; } = "";
-    [ObservableProperty] public partial bool IsWifiDiscoveryRunning { get; set; }
-    [ObservableProperty] public partial bool IsBluetoothScanning { get; set; }
-    [ObservableProperty] public partial bool HasUsbDevices { get; set; }
-    [ObservableProperty] public partial bool HasWifiDevices { get; set; }
+    [ObservableProperty]
+    private int _selectedMethod;
+    [ObservableProperty]
+    private string _usbStatus = "Checking Apple Mobile Device Service…";
+    [ObservableProperty]
+    private string _wifiStatus = "Wi-Fi discovery is off.";
+    [ObservableProperty]
+    private string _bluetoothStatus = "Bluetooth status not checked.";
+    [ObservableProperty]
+    private string _pairingStatus = "";
+    [ObservableProperty]
+    private bool _isWifiDiscoveryRunning;
+    [ObservableProperty]
+    private bool _isBluetoothScanning;
+    [ObservableProperty]
+    private bool _hasUsbDevices;
+    [ObservableProperty]
+    private bool _hasWifiDevices;
 
     public bool IsUsbSelected => SelectedMethod == 0;
     public bool IsWifiSelected => SelectedMethod == 1;

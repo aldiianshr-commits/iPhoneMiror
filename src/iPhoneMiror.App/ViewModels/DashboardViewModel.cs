@@ -36,7 +36,8 @@ public sealed partial class DashboardViewModel : ObservableObject
 
     public ObservableCollection<RecentDeviceItem> RecentDevices { get; } = [];
 
-    [ObservableProperty] public partial bool HasRecent { get; set; }
+    [ObservableProperty]
+    private bool _hasRecent;
 
     public string Greeting
     {

@@ -26,10 +26,14 @@ public sealed partial class DeviceHub : ObservableObject
 
     public ObservableCollection<DeviceItemViewModel> Devices { get; } = [];
 
-    [ObservableProperty] public partial bool ServiceAvailable { get; set; }
-    [ObservableProperty] public partial string ServiceMessage { get; set; } = "";
-    [ObservableProperty] public partial int ConnectedCount { get; set; }
-    [ObservableProperty] public partial bool HasDevices { get; set; }
+    [ObservableProperty]
+    private bool _serviceAvailable;
+    [ObservableProperty]
+    private string _serviceMessage = "";
+    [ObservableProperty]
+    private int _connectedCount;
+    [ObservableProperty]
+    private bool _hasDevices;
 
     public event EventHandler? DevicesChanged;
 

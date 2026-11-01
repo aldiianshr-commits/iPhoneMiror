@@ -235,6 +235,11 @@ public sealed partial class DisplayWindow : Window
         }
     }
 
+    private void InputToggle_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Microsoft.UI.Xaml.Controls.Primitives.ToggleButton t) ViewModel.IsInputEnabled = t.IsChecked == true;
+    }
+
     private async void Home_Click(object sender, RoutedEventArgs e) => await RunInputAsync(() => _input.PressButtonAsync(HardwareButton.Home));
 
     private void ShowToast(InfoBarSeverity severity, string title, string message)

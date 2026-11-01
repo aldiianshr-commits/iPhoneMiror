@@ -19,20 +19,34 @@ public sealed partial class DeviceItemViewModel : ObservableObject
     public DeviceInfo Info { get; private set; }
     public string Udid => Info.Udid;
 
-    [ObservableProperty] public partial string Name { get; set; } = "";
-    [ObservableProperty] public partial string Model { get; set; } = "";
-    [ObservableProperty] public partial string IosVersionText { get; set; } = "";
-    [ObservableProperty] public partial string ConnectionText { get; set; } = "";
-    [ObservableProperty] public partial string BatteryText { get; set; } = "";
-    [ObservableProperty] public partial string StatusText { get; set; } = "";
-    [ObservableProperty] public partial string PairingText { get; set; } = "";
-    [ObservableProperty] public partial string DetailText { get; set; } = "";
-    [ObservableProperty] public partial string CompatibilitySummary { get; set; } = "";
-    [ObservableProperty] public partial bool IsConnected { get; set; }
-    [ObservableProperty] public partial bool IsAttached { get; set; }
-    [ObservableProperty] public partial bool NeedsTrust { get; set; }
-    [ObservableProperty] public partial string StatusGlyph { get; set; } = "";
-    [ObservableProperty] public partial IReadOnlyList<FeatureCompatibility> Features { get; set; } = [];
+    [ObservableProperty]
+    private string _name = "";
+    [ObservableProperty]
+    private string _model = "";
+    [ObservableProperty]
+    private string _iosVersionText = "";
+    [ObservableProperty]
+    private string _connectionText = "";
+    [ObservableProperty]
+    private string _batteryText = "";
+    [ObservableProperty]
+    private string _statusText = "";
+    [ObservableProperty]
+    private string _pairingText = "";
+    [ObservableProperty]
+    private string _detailText = "";
+    [ObservableProperty]
+    private string _compatibilitySummary = "";
+    [ObservableProperty]
+    private bool _isConnected;
+    [ObservableProperty]
+    private bool _isAttached;
+    [ObservableProperty]
+    private bool _needsTrust;
+    [ObservableProperty]
+    private string _statusGlyph = "";
+    [ObservableProperty]
+    private IReadOnlyList<FeatureCompatibility> _features = [];
 
     public void Apply(DeviceInfo info)
     {

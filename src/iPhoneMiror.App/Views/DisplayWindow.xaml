@@ -86,7 +86,7 @@
                         IsEnabled="{x:Bind ViewModel.InputAvailable, Mode=OneWay}">
                     <FontIcon Glyph="&#xE80F;" FontSize="15" />
                 </Button>
-                <ToggleButton ToolTipService.ToolTip="Mouse and keyboard control" IsChecked="{x:Bind ViewModel.IsInputEnabled, Mode=TwoWay}" Style="{StaticResource ToolbarToggleStyle}">
+                <ToggleButton ToolTipService.ToolTip="Mouse and keyboard control" IsChecked="{x:Bind ViewModel.IsInputEnabled, Mode=OneWay}" Click="InputToggle_Click" Style="{StaticResource ToolbarToggleStyle}">
                     <FontIcon Glyph="&#xE962;" FontSize="15" />
                 </ToggleButton>
                 <AppBarSeparator />

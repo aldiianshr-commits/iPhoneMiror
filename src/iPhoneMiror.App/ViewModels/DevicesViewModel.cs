@@ -32,8 +32,10 @@ public sealed partial class DevicesViewModel : ObservableObject
 
     public DeviceHub Hub { get; }
 
-    [ObservableProperty] public partial DeviceItemViewModel? Selected { get; set; }
-    [ObservableProperty] public partial string Message { get; set; } = "";
+    [ObservableProperty]
+    private DeviceItemViewModel? _selected;
+    [ObservableProperty]
+    private string _message = "";
 
     public bool HasSelection => Selected is not null;
 

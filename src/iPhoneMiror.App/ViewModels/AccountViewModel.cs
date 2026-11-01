@@ -34,18 +34,26 @@ public sealed partial class AccountViewModel : ObservableObject
     public DeviceHub Hub { get; }
     public ObservableCollection<PairingInfoItem> Pairings { get; } = [];
 
-    [ObservableProperty] public partial string StateText { get; set; } = "";
-    [ObservableProperty] public partial string Message { get; set; } = "";
-    [ObservableProperty] public partial string AccountText { get; set; } = "";
-    [ObservableProperty] public partial string VerifiedText { get; set; } = "";
+    [ObservableProperty]
+    private string _stateText = "";
+    [ObservableProperty]
+    private string _message = "";
+    [ObservableProperty]
+    private string _accountText = "";
+    [ObservableProperty]
+    private string _verifiedText = "";
     [ObservableProperty, NotifyCanExecuteChangedFor(nameof(SignOutCommand), nameof(SignInCommand))]
-    public partial bool IsSignedIn { get; set; }
+    private bool _isSignedIn;
     [ObservableProperty, NotifyCanExecuteChangedFor(nameof(SignInCommand))]
-    public partial bool IsConfigured { get; set; }
-    [ObservableProperty] public partial string ServicesId { get; set; } = "";
-    [ObservableProperty] public partial string RedirectUri { get; set; } = "";
-    [ObservableProperty] public partial string ConfigMessage { get; set; } = "";
-    [ObservableProperty] public partial IndicatorKind Indicator { get; set; }
+    private bool _isConfigured;
+    [ObservableProperty]
+    private string _servicesId = "";
+    [ObservableProperty]
+    private string _redirectUri = "";
+    [ObservableProperty]
+    private string _configMessage = "";
+    [ObservableProperty]
+    private IndicatorKind _indicator;
 
     private void Apply(AppleAccountStatus s)
     {

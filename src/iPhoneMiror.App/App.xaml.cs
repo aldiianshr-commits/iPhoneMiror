@@ -75,6 +75,12 @@ public partial class App : Application
         catch (Exception ex)
         {
             _logger?.LogCritical(ex, "Startup failed (HRESULT 0x{HResult:X8}): {Message}", ex.HResult, ex.Message);
+            if (IsScreenshotMode && _logger is not null)
+            {
+                try { XamlDiagnostics.Run(_logger); }
+                catch (Exception dex) { _logger.LogError(dex, "XAML diagnostics failed."); }
+                await Task.Delay(1000);
+            }
             if (IsScreenshotMode) Environment.Exit(4);
             throw;
         }

@@ -17,6 +17,8 @@
     <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
     <!-- CommunityToolkit.Mvvm partial-property generators require the preview language version. -->
     <LangVersion>preview</LangVersion>
+    <!-- TEMP diagnostics: text XAML gives line numbers in XamlParseException. -->
+    <DisableXbfGeneration>true</DisableXbfGeneration>
     <Description>iPhoneMiror — connect, mirror and control an iPhone from Windows 11.</Description>
   </PropertyGroup>
 

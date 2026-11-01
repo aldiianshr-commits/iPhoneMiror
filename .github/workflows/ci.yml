@@ -36,7 +36,7 @@ jobs:
       - name: Unit tests
         run: |
           dotnet test tests/iPhoneMiror.UnitTests/iPhoneMiror.UnitTests.csproj -c Release --no-build \
-            --logger "trx;LogFileName=unit.trx" --logger "console;verbosity=normal" --results-directory TestResults \
+            --logger "trx;LogFileName=unit.trx" --logger "console;verbosity=detailed" --results-directory TestResults \
             --collect:"XPlat Code Coverage" 2>&1 | tee unit-tests.txt; exit ${PIPESTATUS[0]}
       - name: Integration tests
         if: always()

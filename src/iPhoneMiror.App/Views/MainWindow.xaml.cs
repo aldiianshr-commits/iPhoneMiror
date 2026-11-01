@@ -158,7 +158,19 @@ public sealed partial class MainWindow : Window
             failures++;
             _logger.LogError(ex, "Capturing the Display window failed.");
         }
+        LogResourceUsage();
         return failures == 0 ? 0 : 2;
+    }
+
+    private void LogResourceUsage()
+    {
+        using var proc = System.Diagnostics.Process.GetCurrentProcess();
+        proc.Refresh();
+        var uptime = DateTime.Now - proc.StartTime;
+        _logger.LogInformation(
+            "Resource usage after visiting all pages and the Display window: uptime {Uptime:0.0} s, working set {Ws:0.0} MB, peak working set {Peak:0.0} MB, private {Private:0.0} MB, managed heap {Heap:0.0} MB, GC gen0/1/2 {G0}/{G1}/{G2}, threads {Threads}, handles {Handles}",
+            uptime.TotalSeconds, proc.WorkingSet64 / 1048576.0, proc.PeakWorkingSet64 / 1048576.0, proc.PrivateMemorySize64 / 1048576.0,
+            GC.GetTotalMemory(false) / 1048576.0, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2), proc.Threads.Count, proc.HandleCount);
     }
 
     private async Task WithTimeout(Task capture, string what)

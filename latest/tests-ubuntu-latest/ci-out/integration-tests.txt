@@ -1,0 +1,26 @@
+Test run for /home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.4+50e68bbb8b (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.09]   Discovering: iPhoneMiror.IntegrationTests
+[xUnit.net 00:00:00.14]   Discovered:  iPhoneMiror.IntegrationTests
+[xUnit.net 00:00:00.18]   Starting:    iPhoneMiror.IntegrationTests
+  Passed iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.Replug_ReconnectsWithStoredPairing [2 s]
+  Passed iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UsbmuxClient_ListsDevicesAndReadsBuid [9 ms]
+  Passed iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UnreachableService_ReportsClearError [13 ms]
+  Passed iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.ServiceUnavailable_IsReportedAndRetried [8 ms]
+  Passed iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UsbmuxClient_ConnectToClosedPort_IsRefused [8 ms]
+  Passed iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UserDeniesTrust_IsReported [759 ms]
+  Passed iPhoneMiror.IntegrationTests.WdaIntegrationTests.Mirroring_StreamsFramesAndReconnects [3 s]
+  Passed iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UserDisconnect_StopsUntilReconnect [1 s]
+[xUnit.net 00:00:05.67]   Finished:    iPhoneMiror.IntegrationTests
+Data collector 'Blame' message: All tests finished running, Sequence file will not be generated.
+  Passed iPhoneMiror.IntegrationTests.WdaIntegrationTests.InputForwarder_SendsTouchesThroughUsbTunnel [1 s]
+  Passed iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.Attach_TrustDialog_Pairs_StartsTlsSession_ReadsInfo [966 ms]
+  Passed iPhoneMiror.IntegrationTests.WdaIntegrationTests.InputForwarder_ReportsUnavailableWithoutWda [707 ms]
+  Passed iPhoneMiror.IntegrationTests.WdaIntegrationTests.Mirroring_AirPlayWithoutUxPlay_ReportsError [2 ms]
+Results File: /home/runner/work/iPhoneMiror/iPhoneMiror/TestResults/integration.trx
+
+Test Run Successful.
+Total tests: 12
+     Passed: 12
+ Total time: 6.4074 Seconds

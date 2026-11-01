@@ -1,0 +1,93 @@
+Test run for D:\a\iPhoneMiror\iPhoneMiror\tests\iPhoneMiror.UnitTests\bin\Release\net10.0\iPhoneMiror.UnitTests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+D:\a\iPhoneMiror\iPhoneMiror\tests\iPhoneMiror.UnitTests\bin\Release\net10.0\iPhoneMiror.UnitTests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.4+50e68bbb8b (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.12]   Discovering: iPhoneMiror.UnitTests
+[xUnit.net 00:00:00.19]   Discovered:  iPhoneMiror.UnitTests
+[xUnit.net 00:00:00.24]   Starting:    iPhoneMiror.UnitTests
+  Passed iPhoneMiror.UnitTests.CoreTests.Catalog_KnownAndUnknown [10 ms]
+  Passed iPhoneMiror.UnitTests.LockdownAndPairingTests.LockdownException_ClassifiesErrors [8 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.IosVersion_Compares [1 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.ReconnectPolicy_GrowsAndCaps [8 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.IosVersion_Parses(text: "26.0.1", major: 26, minor: 0, patch: 1) [4 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.IosVersion_Parses(text: "26.0", major: 26, minor: 0, patch: 0) [< 1 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.IosVersion_Parses(text: "27", major: 27, minor: 0, patch: 0) [< 1 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.DeviceInfo_DisplayNameFallsBackToModel [6 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.IosVersion_RejectsInvalid(text: "1.2.3.4") [< 1 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.IosVersion_RejectsInvalid(text: "") [< 1 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.IosVersion_RejectsInvalid(text: "abc") [< 1 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.IosVersion_RejectsInvalid(text: "26.x") [< 1 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.Compatibility_VerifiedListMarksVersion [17 ms]
+  Passed iPhoneMiror.UnitTests.LockdownAndPairingTests.HostCertificate_HasUsablePrivateKey [440 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.SqliteRepository_UpsertsDevicesAndEvents [443 ms]
+  Passed iPhoneMiror.UnitTests.LockdownAndPairingTests.PairRecord_RoundTripAndRequestExcludesPrivateKeys [307 ms]
+  Passed iPhoneMiror.UnitTests.PerformanceTests.PlistAndGestures_AreCheap [202 ms]
+  Standard Output Messages:
+ plist round-trip: 28.4 µs each; gesture translation: 0.57 µs per click
+
+
+  Passed iPhoneMiror.UnitTests.LockdownAndPairingTests.Generator_ProducesValidChain [337 ms]
+  Passed iPhoneMiror.UnitTests.LockdownAndPairingTests.Framing_RoundTrip [6 ms]
+  Passed iPhoneMiror.UnitTests.MirroringTests.UxPlay_ParsesConnectionLines [11 ms]
+  Passed iPhoneMiror.UnitTests.PerformanceTests.Mjpeg_ParsesWellAboveSixtyFramesPerSecond [375 ms]
+  Standard Output Messages:
+ MJPEG: 300 frames in 38 ms = 7886 fps, 1129 MB/s, allocated 43.3 MB (1.01 bytes per input byte)
+
+
+  Passed iPhoneMiror.UnitTests.PlistTests.Xml_ContainsAppleDoctype [< 1 ms]
+  Passed iPhoneMiror.UnitTests.PlistTests.Binary_RejectsTruncatedData [1 ms]
+  Passed iPhoneMiror.UnitTests.MirroringTests.Mjpeg_RejectsErrorStatus [9 ms]
+  Passed iPhoneMiror.UnitTests.PlistTests.Binary_ParsesPythonGeneratedFixture [8 ms]
+  Passed iPhoneMiror.UnitTests.PlistTests.Xml_RejectsGarbage [1 ms]
+  Passed iPhoneMiror.UnitTests.PlistTests.Xml_RoundTrip_PreservesAllTypes [1 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.NormalizeUdid(input: "00008030001A2D3E3C82802E", expected: "00008030-001A2D3E3C82802E") [< 1 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.NormalizeUdid(input: "0123456789abcdef0123456789abcdef01234567", expected: "0123456789abcdef0123456789abcdef01234567") [< 1 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.NormalizeUdid(input: "00008030-001A2D3E3C82802E", expected: "00008030-001A2D3E3C82802E") [< 1 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.Port_IsSentInNetworkByteOrder(port: 9100, encoded: 35875) [4 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.Port_IsSentInNetworkByteOrder(port: 62078, encoded: 32498) [< 1 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.Port_IsSentInNetworkByteOrder(port: 8100, encoded: 42015) [< 1 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.Device_FromNetworkProperties_ParsesSockaddr [2 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.Encode_WritesLittleEndianHeader [1 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.Device_FromUsbProperties [< 1 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.SettingsStore_PersistsChanges [686 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.ReadPacket_RoundTripsThroughStream [3 ms]
+  Passed iPhoneMiror.UnitTests.CoreTests.Compatibility_NothingVerifiedByDefault [2 ms]
+  Passed iPhoneMiror.UnitTests.DnsAndDiscoveryTests.WifiMacFromInstanceName(name: "SomeService._remotepairing._tcp.local", expected: null) [1 ms]
+  Passed iPhoneMiror.UnitTests.DnsAndDiscoveryTests.WifiMacFromInstanceName(name: "AA:BB:CC:DD:EE:FF@fe80::1._apple-mobdev2._tcp.loca"···, expected: "aa:bb:cc:dd:ee:ff") [1 ms]
+  Passed iPhoneMiror.UnitTests.UsbmuxTests.ParseNetworkAddress_IPv6 [11 ms]
+  Passed iPhoneMiror.UnitTests.DnsAndDiscoveryTests.Query_EncodesPtrQuestion [11 ms]
+  Passed iPhoneMiror.UnitTests.DnsAndDiscoveryTests.Parse_RejectsCompressionLoop [< 1 ms]
+  Passed iPhoneMiror.UnitTests.DnsAndDiscoveryTests.Browser_ResolvesInstanceFromResponse [19 ms]
+  Passed iPhoneMiror.UnitTests.DnsAndDiscoveryTests.Parse_ResponseWithCompression [4 ms]
+  Passed iPhoneMiror.UnitTests.MirroringTests.Mjpeg_ReadsWdaFormattedFrames(chunk: 1) [54 ms]
+  Passed iPhoneMiror.UnitTests.MirroringTests.Mjpeg_ReadsWdaFormattedFrames(chunk: 7) [2 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.WdaClient_UsesVerifiedRoutes [43 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.Gestures_DoubleTap [2 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.Gestures_WheelUpSwipesFingerDown [2 ms]
+  Passed iPhoneMiror.UnitTests.MirroringTests.Mjpeg_ReadsWdaFormattedFrames(chunk: 4096) [6 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.Keyboard_SpecialKeys(vk: 72, ctrl: True, shift: True, action: Home, text: null) [4 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.Keyboard_SpecialKeys(vk: 72, ctrl: False, shift: False, action: None, text: null) [< 1 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.Keyboard_SpecialKeys(vk: 8, ctrl: False, shift: False, action: TypeText, text: "\b") [< 1 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.Keyboard_SpecialKeys(vk: 13, ctrl: False, shift: False, action: TypeText, text: "\n") [< 1 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.Mapper_SwapsDeviceSizeForLandscapeFrame [3 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.Gestures_SingleTapIsDeferredUntilFlush [< 1 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.SwipeActions_UseTouchPointer [< 1 ms]
+  Passed iPhoneMiror.UnitTests.InputTests.Mapper_CentredLetterbox [< 1 ms]
+  Passed iPhoneMiror.UnitTests.MirroringTests.JpegInfo_ReadsSize [16 ms]
+[xUnit.net 00:00:01.77]   Finished:    iPhoneMiror.UnitTests
+  Passed iPhoneMiror.UnitTests.InputTests.Gestures_LongPressAndSwipe [9 ms]
+  Passed iPhoneMiror.UnitTests.MirroringTests.Mjpeg_PartsWithoutContentLength_UseEoi [4 ms]
+  Passed iPhoneMiror.UnitTests.MirroringTests.FrameRateMeter_CountsWithinWindow [2 ms]
+  Passed iPhoneMiror.UnitTests.AppleAccountTests.Validator_AcceptsGenuineToken [90 ms]
+  Passed iPhoneMiror.UnitTests.AppleAccountTests.Validator_RejectsTampering [89 ms]
+  Passed iPhoneMiror.UnitTests.AppleAccountTests.Service_FullFlow_StoresIdentityNotPassword [37 ms]
+  Passed iPhoneMiror.UnitTests.AppleAccountTests.Service_UserCancelled [1 ms]
+Results File: D:\a\iPhoneMiror\iPhoneMiror\TestResults\unit.trx
+
+Test Run Successful.
+Total tests: 68
+     Passed: 68
+ Total time: 3.9809 Seconds
+
+Attachments:
+  D:\a\iPhoneMiror\iPhoneMiror\TestResults\f1c61866-ea12-4958-9187-a100c1cb7499\coverage.cobertura.xml

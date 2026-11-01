@@ -1,0 +1,22 @@
+  Determining projects to restore...
+  Restored D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\iPhoneMiror.Connection.csproj (in 9.84 sec).
+  Restored D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Input\iPhoneMiror.Input.csproj (in 9.83 sec).
+  Restored D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Mirroring\iPhoneMiror.Mirroring.csproj (in 4 ms).
+  Restored D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Core\iPhoneMiror.Core.csproj (in 4 ms).
+  Restored D:\a\iPhoneMiror\iPhoneMiror\tests\iPhoneMiror.IntegrationTests\iPhoneMiror.IntegrationTests.csproj (in 9.99 sec).
+  Restored D:\a\iPhoneMiror\iPhoneMiror\tests\iPhoneMiror.UnitTests\iPhoneMiror.UnitTests.csproj (in 9.99 sec).
+  Restored D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.DeviceDiscovery\iPhoneMiror.DeviceDiscovery.csproj (in 1.62 sec).
+  iPhoneMiror.Core -> D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Core\bin\Release\net10.0\iPhoneMiror.Core.dll
+  iPhoneMiror.Mirroring -> D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Mirroring\bin\Release\net10.0\iPhoneMiror.Mirroring.dll
+  iPhoneMiror.Input -> D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Input\bin\Release\net10.0\iPhoneMiror.Input.dll
+  iPhoneMiror.DeviceDiscovery -> D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.DeviceDiscovery\bin\Release\net10.0\iPhoneMiror.DeviceDiscovery.dll
+  iPhoneMiror.DeviceDiscovery -> D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.DeviceDiscovery\bin\Release\net10.0-windows10.0.19041.0\iPhoneMiror.DeviceDiscovery.dll
+  iPhoneMiror.Connection -> D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\bin\Release\net10.0\iPhoneMiror.Connection.dll
+  iPhoneMiror.IntegrationTests -> D:\a\iPhoneMiror\iPhoneMiror\tests\iPhoneMiror.IntegrationTests\bin\Release\net10.0\iPhoneMiror.IntegrationTests.dll
+  iPhoneMiror.UnitTests -> D:\a\iPhoneMiror\iPhoneMiror\tests\iPhoneMiror.UnitTests\bin\Release\net10.0\iPhoneMiror.UnitTests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:25.12

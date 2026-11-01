@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="cd864937-be59-4643-b075-c7a880e5fb57" name="@runnervm48cm3 2026-11-01 16:46:08" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-01T16:46:08.4342735+00:00" queuing="2026-11-01T16:46:08.4342736+00:00" start="2026-11-01T16:46:04.5073152+00:00" finish="2026-11-01T16:46:10.9294323+00:00" />
+  <TestSettings name="default" id="3cd088b1-e1d4-402e-a723-5fb32be08f22">
+    <Deployment runDeploymentRoot="_runnervm48cm3_2026-11-01_16_46_08" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d865fd3e-a80c-4168-bc24-829b80b4fdc9" testId="87d9c6e6-14c6-ac3c-5075-18882b387cd0" testName="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.Replug_ReconnectsWithStoredPairing" computerName="runnervm48cm3" duration="00:00:02.0124622" startTime="2026-11-01T16:46:05.4471203+00:00" endTime="2026-11-01T16:46:07.4175392+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d865fd3e-a80c-4168-bc24-829b80b4fdc9" />
+    <UnitTestResult executionId="68dfb1b5-dc60-48e5-98a0-7b446d1a2498" testId="b69a916f-ce3d-b5e5-df6c-52cfd54bee8c" testName="iPhoneMiror.IntegrationTests.WdaIntegrationTests.InputForwarder_ReportsUnavailableWithoutWda" computerName="runnervm48cm3" duration="00:00:00.7078187" startTime="2026-11-01T16:46:10.1301923+00:00" endTime="2026-11-01T16:46:10.8359250+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="68dfb1b5-dc60-48e5-98a0-7b446d1a2498" />
+    <UnitTestResult executionId="bf0995f6-9665-4532-92a6-acf6cb8d5d54" testId="68cbf3c1-f308-ea87-dbd3-98f2b8617df6" testName="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.ServiceUnavailable_IsReportedAndRetried" computerName="runnervm48cm3" duration="00:00:00.0086881" startTime="2026-11-01T16:46:07.4648391+00:00" endTime="2026-11-01T16:46:07.4650119+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bf0995f6-9665-4532-92a6-acf6cb8d5d54" />
+    <UnitTestResult executionId="db3629a7-f547-4c9d-b4f1-7b0690c17a7d" testId="968654cb-6705-cd21-63c7-c80316d50653" testName="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UsbmuxClient_ListsDevicesAndReadsBuid" computerName="runnervm48cm3" duration="00:00:00.0091217" startTime="2026-11-01T16:46:07.4550320+00:00" endTime="2026-11-01T16:46:07.4552569+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db3629a7-f547-4c9d-b4f1-7b0690c17a7d" />
+    <UnitTestResult executionId="9fa26c2a-a7ea-4e16-bde0-b39555e04450" testId="63f83087-89ea-c620-fccc-ba880e7c9cc5" testName="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UserDisconnect_StopsUntilReconnect" computerName="runnervm48cm3" duration="00:00:01.0179225" startTime="2026-11-01T16:46:08.2240352+00:00" endTime="2026-11-01T16:46:09.2389446+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9fa26c2a-a7ea-4e16-bde0-b39555e04450" />
+    <UnitTestResult executionId="06e7319b-559b-49c7-81ef-8dd29b742330" testId="8a842842-a73d-8af0-fcf1-a7728711516a" testName="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UnreachableService_ReportsClearError" computerName="runnervm48cm3" duration="00:00:00.0133305" startTime="2026-11-01T16:46:07.4608569+00:00" endTime="2026-11-01T16:46:07.4609879+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="06e7319b-559b-49c7-81ef-8dd29b742330" />
+    <UnitTestResult executionId="b0d577a7-6e9a-4b07-98f5-619b632db7e1" testId="a49503d7-8543-4141-b870-b883dfeb9051" testName="iPhoneMiror.IntegrationTests.WdaIntegrationTests.InputForwarder_SendsTouchesThroughUsbTunnel" computerName="runnervm48cm3" duration="00:00:01.2093413" startTime="2026-11-01T16:46:08.9232385+00:00" endTime="2026-11-01T16:46:10.1275706+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b0d577a7-6e9a-4b07-98f5-619b632db7e1" />
+    <UnitTestResult executionId="b693ed74-d03b-438a-9a56-8707dfaba3ab" testId="dbe79f73-0755-b1f0-0e7a-616fe7251110" testName="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UsbmuxClient_ConnectToClosedPort_IsRefused" computerName="runnervm48cm3" duration="00:00:00.0080341" startTime="2026-11-01T16:46:07.4685732+00:00" endTime="2026-11-01T16:46:07.4686925+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b693ed74-d03b-438a-9a56-8707dfaba3ab" />
+    <UnitTestResult executionId="3faf75dd-eebf-4fed-800e-ca005b9fb1fb" testId="000de6c1-62a4-520a-865a-7b8a83164a91" testName="iPhoneMiror.IntegrationTests.WdaIntegrationTests.Mirroring_AirPlayWithoutUxPlay_ReportsError" computerName="runnervm48cm3" duration="00:00:00.0027586" startTime="2026-11-01T16:46:10.8387848+00:00" endTime="2026-11-01T16:46:10.8389137+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3faf75dd-eebf-4fed-800e-ca005b9fb1fb" />
+    <UnitTestResult executionId="b345188d-cbdb-45ac-b5f9-537b29c377d7" testId="b3673f17-89f9-60cb-0a79-0c4d7749acd0" testName="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UserDeniesTrust_IsReported" computerName="runnervm48cm3" duration="00:00:00.7592286" startTime="2026-11-01T16:46:07.4722832+00:00" endTime="2026-11-01T16:46:08.2204743+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b345188d-cbdb-45ac-b5f9-537b29c377d7" />
+    <UnitTestResult executionId="fb325b08-e6f5-4f54-b3e8-3a23e5985ab9" testId="078d67bc-99d7-dc83-b730-09c7875f6bfb" testName="iPhoneMiror.IntegrationTests.WdaIntegrationTests.Mirroring_StreamsFramesAndReconnects" computerName="runnervm48cm3" duration="00:00:03.5155520" startTime="2026-11-01T16:46:05.4503250+00:00" endTime="2026-11-01T16:46:08.9176962+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fb325b08-e6f5-4f54-b3e8-3a23e5985ab9" />
+    <UnitTestResult executionId="36e28dd7-54d0-4d56-a92e-8c6ffb5afad2" testId="0ecbbfdc-a338-83f9-a2cd-5b426c916f61" testName="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.Attach_TrustDialog_Pairs_StartsTlsSession_ReadsInfo" computerName="runnervm48cm3" duration="00:00:00.9667488" startTime="2026-11-01T16:46:09.2417939+00:00" endTime="2026-11-01T16:46:10.2061741+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="36e28dd7-54d0-4d56-a92e-8c6ffb5afad2" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.Replug_ReconnectsWithStoredPairing" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="87d9c6e6-14c6-ac3c-5075-18882b387cd0">
+      <Execution id="d865fd3e-a80c-4168-bc24-829b80b4fdc9" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests" name="Replug_ReconnectsWithStoredPairing" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UserDisconnect_StopsUntilReconnect" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="63f83087-89ea-c620-fccc-ba880e7c9cc5">
+      <Execution id="9fa26c2a-a7ea-4e16-bde0-b39555e04450" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests" name="UserDisconnect_StopsUntilReconnect" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UserDeniesTrust_IsReported" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="b3673f17-89f9-60cb-0a79-0c4d7749acd0">
+      <Execution id="b345188d-cbdb-45ac-b5f9-537b29c377d7" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests" name="UserDeniesTrust_IsReported" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UsbmuxClient_ConnectToClosedPort_IsRefused" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="dbe79f73-0755-b1f0-0e7a-616fe7251110">
+      <Execution id="b693ed74-d03b-438a-9a56-8707dfaba3ab" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests" name="UsbmuxClient_ConnectToClosedPort_IsRefused" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UnreachableService_ReportsClearError" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="8a842842-a73d-8af0-fcf1-a7728711516a">
+      <Execution id="06e7319b-559b-49c7-81ef-8dd29b742330" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests" name="UnreachableService_ReportsClearError" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.WdaIntegrationTests.Mirroring_AirPlayWithoutUxPlay_ReportsError" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="000de6c1-62a4-520a-865a-7b8a83164a91">
+      <Execution id="3faf75dd-eebf-4fed-800e-ca005b9fb1fb" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.WdaIntegrationTests" name="Mirroring_AirPlayWithoutUxPlay_ReportsError" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.WdaIntegrationTests.InputForwarder_ReportsUnavailableWithoutWda" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="b69a916f-ce3d-b5e5-df6c-52cfd54bee8c">
+      <Execution id="68dfb1b5-dc60-48e5-98a0-7b446d1a2498" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.WdaIntegrationTests" name="InputForwarder_ReportsUnavailableWithoutWda" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.WdaIntegrationTests.InputForwarder_SendsTouchesThroughUsbTunnel" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="a49503d7-8543-4141-b870-b883dfeb9051">
+      <Execution id="b0d577a7-6e9a-4b07-98f5-619b632db7e1" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.WdaIntegrationTests" name="InputForwarder_SendsTouchesThroughUsbTunnel" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.WdaIntegrationTests.Mirroring_StreamsFramesAndReconnects" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="078d67bc-99d7-dc83-b730-09c7875f6bfb">
+      <Execution id="fb325b08-e6f5-4f54-b3e8-3a23e5985ab9" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.WdaIntegrationTests" name="Mirroring_StreamsFramesAndReconnects" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.Attach_TrustDialog_Pairs_StartsTlsSession_ReadsInfo" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="0ecbbfdc-a338-83f9-a2cd-5b426c916f61">
+      <Execution id="36e28dd7-54d0-4d56-a92e-8c6ffb5afad2" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests" name="Attach_TrustDialog_Pairs_StartsTlsSession_ReadsInfo" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.ServiceUnavailable_IsReportedAndRetried" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="68cbf3c1-f308-ea87-dbd3-98f2b8617df6">
+      <Execution id="bf0995f6-9665-4532-92a6-acf6cb8d5d54" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests" name="ServiceUnavailable_IsReportedAndRetried" />
+    </UnitTest>
+    <UnitTest name="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests.UsbmuxClient_ListsDevicesAndReadsBuid" storage="/home/runner/work/iphonemiror/iphonemiror/tests/iphonemiror.integrationtests/bin/release/net10.0/iphonemiror.integrationtests.dll" id="968654cb-6705-cd21-63c7-c80316d50653">
+      <Execution id="db3629a7-f547-4c9d-b4f1-7b0690c17a7d" />
+      <TestMethod codeBase="/home/runner/work/iPhoneMiror/iPhoneMiror/tests/iPhoneMiror.IntegrationTests/bin/Release/net10.0/iPhoneMiror.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="iPhoneMiror.IntegrationTests.ConnectionIntegrationTests" name="UsbmuxClient_ListsDevicesAndReadsBuid" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="87d9c6e6-14c6-ac3c-5075-18882b387cd0" executionId="d865fd3e-a80c-4168-bc24-829b80b4fdc9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b69a916f-ce3d-b5e5-df6c-52cfd54bee8c" executionId="68dfb1b5-dc60-48e5-98a0-7b446d1a2498" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="68cbf3c1-f308-ea87-dbd3-98f2b8617df6" executionId="bf0995f6-9665-4532-92a6-acf6cb8d5d54" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="968654cb-6705-cd21-63c7-c80316d50653" executionId="db3629a7-f547-4c9d-b4f1-7b0690c17a7d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="63f83087-89ea-c620-fccc-ba880e7c9cc5" executionId="9fa26c2a-a7ea-4e16-bde0-b39555e04450" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8a842842-a73d-8af0-fcf1-a7728711516a" executionId="06e7319b-559b-49c7-81ef-8dd29b742330" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a49503d7-8543-4141-b870-b883dfeb9051" executionId="b0d577a7-6e9a-4b07-98f5-619b632db7e1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dbe79f73-0755-b1f0-0e7a-616fe7251110" executionId="b693ed74-d03b-438a-9a56-8707dfaba3ab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="000de6c1-62a4-520a-865a-7b8a83164a91" executionId="3faf75dd-eebf-4fed-800e-ca005b9fb1fb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b3673f17-89f9-60cb-0a79-0c4d7749acd0" executionId="b345188d-cbdb-45ac-b5f9-537b29c377d7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="078d67bc-99d7-dc83-b730-09c7875f6bfb" executionId="fb325b08-e6f5-4f54-b3e8-3a23e5985ab9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0ecbbfdc-a338-83f9-a2cd-5b426c916f61" executionId="36e28dd7-54d0-4d56-a92e-8c6ffb5afad2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="12" executed="12" passed="12" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.4+50e68bbb8b (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.09]   Discovering: iPhoneMiror.IntegrationTests
+[xUnit.net 00:00:00.14]   Discovered:  iPhoneMiror.IntegrationTests
+[xUnit.net 00:00:00.18]   Starting:    iPhoneMiror.IntegrationTests
+[xUnit.net 00:00:05.67]   Finished:    iPhoneMiror.IntegrationTests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="runnervm48cm3" outcome="Warning" timestamp="2026-11-01T16:46:10.8863487+00:00">
+        <Text>Data collector 'Blame' message: All tests finished running, Sequence file will not be generated.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

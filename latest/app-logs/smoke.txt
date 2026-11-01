@@ -1,0 +1,75 @@
+Exited: True  Exit code: 0
+
+Name                  Length
+----                  ------
+01-dashboard.png       70958
+02-connect.png         55851
+03-devices.png         34540
+04-mirroring.png       83396
+05-account.png         80896
+06-settings.png        49182
+07-display-window.png  13297
+
+
+2026-11-01 16:48:02.962 +00:00 [INF] App: iPhoneMiror 0.1.0.0 starting (.NET 10.0.14, X64).
+2026-11-01 16:48:03.333 +00:00 [INF] App: Main window created.
+2026-11-01 16:48:03.383 +00:00 [INF] App: Services started.
+2026-11-01 16:48:05.421 +00:00 [WRN] DeviceConnectionService: usbmux listen loop failed.
+iPhoneMiror.Connection.Usbmux.UsbmuxException: Apple Mobile Device Service is not reachable at 127.0.0.1:27015. Install the Apple Devices app (Microsoft Store) or iTunes and make sure the service is running.
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.OpenSocketAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 44
+   --- End of inner exception stack trace ---
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.OpenSocketAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 50
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.RequestAsync(PlistDictionary message, CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 57
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.ListDevicesAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 88
+   at iPhoneMiror.Connection.Services.DeviceConnectionService.ListenLoopAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Services\DeviceConnectionService.cs:line 92
+2026-11-01 16:48:05.896 +00:00 [INF] MainWindow: Capturing dashboard…
+2026-11-01 16:48:06.024 +00:00 [INF] MainWindow: Captured dashboard.
+2026-11-01 16:48:08.496 +00:00 [WRN] DeviceConnectionService: usbmux listen loop failed.
+iPhoneMiror.Connection.Usbmux.UsbmuxException: Apple Mobile Device Service is not reachable at 127.0.0.1:27015. Install the Apple Devices app (Microsoft Store) or iTunes and make sure the service is running.
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.OpenSocketAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 44
+   --- End of inner exception stack trace ---
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.OpenSocketAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 50
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.RequestAsync(PlistDictionary message, CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 57
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.ListDevicesAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 88
+   at iPhoneMiror.Connection.Services.DeviceConnectionService.ListenLoopAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Services\DeviceConnectionService.cs:line 92
+2026-11-01 16:48:08.564 +00:00 [INF] MainWindow: Capturing connect…
+2026-11-01 16:48:08.656 +00:00 [INF] MainWindow: Captured connect.
+2026-11-01 16:48:11.171 +00:00 [INF] MainWindow: Capturing devices…
+2026-11-01 16:48:11.235 +00:00 [INF] MainWindow: Captured devices.
+2026-11-01 16:48:12.749 +00:00 [WRN] DeviceConnectionService: usbmux listen loop failed.
+iPhoneMiror.Connection.Usbmux.UsbmuxException: Apple Mobile Device Service is not reachable at 127.0.0.1:27015. Install the Apple Devices app (Microsoft Store) or iTunes and make sure the service is running.
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.OpenSocketAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 44
+   --- End of inner exception stack trace ---
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.OpenSocketAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 50
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.RequestAsync(PlistDictionary message, CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 57
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.ListDevicesAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 88
+   at iPhoneMiror.Connection.Services.DeviceConnectionService.ListenLoopAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Services\DeviceConnectionService.cs:line 92
+2026-11-01 16:48:13.769 +00:00 [INF] MainWindow: Capturing mirroring…
+2026-11-01 16:48:13.885 +00:00 [INF] MainWindow: Captured mirroring.
+2026-11-01 16:48:16.401 +00:00 [INF] MainWindow: Capturing account…
+2026-11-01 16:48:16.515 +00:00 [INF] MainWindow: Captured account.
+2026-11-01 16:48:18.782 +00:00 [WRN] DeviceConnectionService: usbmux listen loop failed.
+iPhoneMiror.Connection.Usbmux.UsbmuxException: Apple Mobile Device Service is not reachable at 127.0.0.1:27015. Install the Apple Devices app (Microsoft Store) or iTunes and make sure the service is running.
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.OpenSocketAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 44
+   --- End of inner exception stack trace ---
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.OpenSocketAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 50
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.RequestAsync(PlistDictionary message, CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 57
+   at iPhoneMiror.Connection.Usbmux.UsbmuxClient.ListDevicesAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Usbmux\UsbmuxClient.cs:line 88
+   at iPhoneMiror.Connection.Services.DeviceConnectionService.ListenLoopAsync(CancellationToken ct) in D:\a\iPhoneMiror\iPhoneMiror\src\iPhoneMiror.Connection\Services\DeviceConnectionService.cs:line 92
+2026-11-01 16:48:19.043 +00:00 [INF] MainWindow: Capturing settings…
+2026-11-01 16:48:19.133 +00:00 [INF] MainWindow: Captured settings.
+2026-11-01 16:48:21.732 +00:00 [INF] MainWindow: Capturing display…
+2026-11-01 16:48:21.820 +00:00 [INF] MainWindow: Resource usage after visiting all pages and the Display window: uptime 19.3 s, working set 220.8 MB, peak working set 227.8 MB, private 109.2 MB, managed heap 2.5 MB, GC gen0/1/2 6/6/6, threads 36, handles 1115
+2026-11-01 16:48:21.821 +00:00 [INF] App: Screenshot run finished with code 0.

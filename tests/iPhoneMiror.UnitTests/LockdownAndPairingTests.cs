@@ -101,7 +101,8 @@ public class LockdownAndPairingTests
         using var cert = record.CreateHostCertificateWithKey();
         Assert.True(cert.HasPrivateKey);
         using var rsa = cert.GetRSAPrivateKey()!;
-        var sig = rsa.SignData([1, 2, 3], HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-        Assert.True(cert.GetRSAPublicKey()!.VerifyData([1, 2, 3], sig, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1));
+        byte[] data = [1, 2, 3];
+        var sig = rsa.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+        Assert.True(cert.GetRSAPublicKey()!.VerifyData(data, sig, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1));
     }
 }

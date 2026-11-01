@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="iPhoneMiror.App.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="using:iPhoneMiror.App.Converters"
+    Background="Transparent">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="{StaticResource PagePadding}" Spacing="14" MaxWidth="980" HorizontalAlignment="Stretch">
+            <StackPanel>
+                <TextBlock Style="{StaticResource PageTitleStyle}" Text="Settings" />
+                <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0" Text="{x:Bind ViewModel.Message, Mode=OneWay}" />
+            </StackPanel>
+
+            <!-- General -->
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="General" />
+                    <ToggleSwitch Header="Ask before closing while mirroring" IsOn="{x:Bind ViewModel.ConfirmBeforeClosing, Mode=TwoWay}" />
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Header="Screenshot folder" Text="{x:Bind ViewModel.ScreenshotFolder, Mode=TwoWay}" />
+                        <Button Grid.Column="1" VerticalAlignment="Bottom" Content="Browse…" Command="{x:Bind ViewModel.BrowseScreenshotFolderCommand}" />
+                        <Button Grid.Column="2" VerticalAlignment="Bottom" Content="Open" Command="{x:Bind ViewModel.OpenScreenshotFolderCommand}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Appearance -->
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Appearance" />
+                    <RadioButtons Header="Theme" SelectedIndex="{x:Bind ViewModel.ThemeIndex, Mode=TwoWay}" MaxColumns="3">
+                        <RadioButton Content="Dark" />
+                        <RadioButton Content="Light" />
+                        <RadioButton Content="Use system setting" />
+                    </RadioButtons>
+                    <ToggleSwitch Header="Mica backdrop (Windows 11)" IsOn="{x:Bind ViewModel.UseMica, Mode=TwoWay}" />
+                    <ToggleSwitch Header="Reduce animations" IsOn="{x:Bind ViewModel.ReduceAnimations, Mode=TwoWay}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Connection -->
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Connection" />
+                    <ToggleSwitch Header="Reconnect automatically" IsOn="{x:Bind ViewModel.AutoReconnect, Mode=TwoWay}" />
+                    <ToggleSwitch Header="Request trust automatically when an iPhone is plugged in" IsOn="{x:Bind ViewModel.AutoPair, Mode=TwoWay}" />
+                    <ToggleSwitch Header="Use iPhones reachable over Wi-Fi" IsOn="{x:Bind ViewModel.EnableWifiDevices, Mode=TwoWay}" />
+                    <TextBox Header="Apple Mobile Device Service endpoint (host:port)" Text="{x:Bind ViewModel.UsbmuxEndpoint, Mode=TwoWay}" />
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <NumberBox Header="WebDriverAgent port" Minimum="1" Maximum="65535" SpinButtonPlacementMode="Compact" Value="{x:Bind ViewModel.WdaPort, Mode=TwoWay}" />
+                        <NumberBox Grid.Column="1" Header="MJPEG stream port" Minimum="1" Maximum="65535" SpinButtonPlacementMode="Compact" Value="{x:Bind ViewModel.MjpegPort, Mode=TwoWay}" />
+                    </Grid>
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Header="UxPlay executable (AirPlay receiver, optional)" PlaceholderText="C:\msys64\ucrt64\bin\uxplay.exe" Text="{x:Bind ViewModel.UxPlayPath, Mode=TwoWay}" />
+                        <Button Grid.Column="1" VerticalAlignment="Bottom" Content="Browse…" Command="{x:Bind ViewModel.BrowseUxPlayCommand}" />
+                    </Grid>
+                    <TextBox Header="AirPlay receiver name" Text="{x:Bind ViewModel.AirPlayName, Mode=TwoWay}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Startup -->
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Startup" />
+                    <ToggleSwitch Header="Launch iPhoneMiror when I sign in to Windows" IsOn="{x:Bind ViewModel.LaunchAtSignIn, Mode=TwoWay}" />
+                    <ToggleSwitch Header="Start minimized" IsOn="{x:Bind ViewModel.StartMinimized, Mode=TwoWay}" />
+                    <ToggleSwitch Header="Start mirroring the last iPhone when it connects" IsOn="{x:Bind ViewModel.AutoStartMirroring, Mode=TwoWay}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Performance -->
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel Spacing="10">
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Performance" />
+                    <Slider Header="Default frame rate" Minimum="5" Maximum="60" StepFrequency="1" Value="{x:Bind ViewModel.FrameRate, Mode=TwoWay}" />
+                    <Slider Header="Default image quality" Minimum="10" Maximum="100" StepFrequency="5" Value="{x:Bind ViewModel.Quality, Mode=TwoWay}" />
+                    <Slider Header="Default resolution scale" Minimum="25" Maximum="100" StepFrequency="5" Value="{x:Bind ViewModel.Scaling, Mode=TwoWay}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Logging -->
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Logging" />
+                    <ComboBox Header="Log level" SelectedIndex="{x:Bind ViewModel.LogLevelIndex, Mode=TwoWay}" MinWidth="220">
+                        <x:String>Trace</x:String>
+                        <x:String>Debug</x:String>
+                        <x:String>Information</x:String>
+                        <x:String>Warning</x:String>
+                        <x:String>Error</x:String>
+                    </ComboBox>
+                    <NumberBox Header="Keep log files (days)" Minimum="1" Maximum="90" SpinButtonPlacementMode="Compact" Value="{x:Bind ViewModel.RetainDays, Mode=TwoWay}" HorizontalAlignment="Left" MinWidth="220" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button Content="Open log folder" Command="{x:Bind ViewModel.OpenLogFolderCommand}" />
+                        <Button Content="Open data folder" Command="{x:Bind ViewModel.OpenDataFolderCommand}" />
+                        <Button Content="Clear recent devices" Command="{x:Bind ViewModel.ClearRecentDevicesCommand}" />
+                        <Button Content="Restore defaults" Command="{x:Bind ViewModel.ResetDefaultsCommand}" />
+                    </StackPanel>
+                    <Border Background="{ThemeResource PillBackgroundBrush}" CornerRadius="10" Padding="10" Height="200">
+                        <ListView ItemsSource="{x:Bind ViewModel.LogLines}" SelectionMode="None" IsItemClickEnabled="False">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <TextBlock FontFamily="Cascadia Mono, Consolas" FontSize="11" TextWrapping="NoWrap" Text="{x:Bind}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- About -->
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel Spacing="8">
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="About" />
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <Image Source="ms-appx:///Assets/AppIcon.png" Width="44" Height="44" />
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontWeight="SemiBold">
+                                <Run Text="iPhoneMiror" /> <Run Text="{x:Bind ViewModel.Version}" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ViewModel.RuntimeInfo}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource CaptionStyle}" IsTextSelectionEnabled="True">
+                        <Run Text="Data folder:" /> <Run Text="{x:Bind ViewModel.DataFolder}" />
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource CaptionStyle}"
+                               Text="MIT License. Protocol knowledge from libimobiledevice / libusbmuxd (LGPL-2.1, re-implemented, no code linked) and WebDriverAgent (BSD-3-Clause). UxPlay (GPL-3.0) is an optional separate program. Not affiliated with or endorsed by Apple Inc. iPhone is a trademark of Apple Inc." />
+                    <HyperlinkButton Content="github.com/aldiianshr-commits/iPhoneMiror" NavigateUri="https://github.com/aldiianshr-commits/iPhoneMiror" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

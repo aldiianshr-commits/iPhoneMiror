@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="iPhoneMiror.App.Views.ConnectPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:iPhoneMiror.App.ViewModels"
+    xmlns:conv="using:iPhoneMiror.App.Converters"
+    Background="Transparent">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="{StaticResource PagePadding}" Spacing="18" MaxWidth="1100" HorizontalAlignment="Stretch">
+            <StackPanel>
+                <TextBlock Style="{StaticResource PageTitleStyle}" Text="Connect iPhone" />
+                <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0"
+                           Text="Choose how this PC reaches your iPhone. USB is the most reliable and is required once to enable Wi-Fi." />
+            </StackPanel>
+
+            <SelectorBar x:Name="MethodBar" SelectionChanged="MethodBar_SelectionChanged">
+                <SelectorBarItem Text="USB" IsSelected="True">
+                    <SelectorBarItem.Icon><FontIcon Glyph="&#xECF0;" /></SelectorBarItem.Icon>
+                </SelectorBarItem>
+                <SelectorBarItem Text="Wi-Fi">
+                    <SelectorBarItem.Icon><FontIcon Glyph="&#xE701;" /></SelectorBarItem.Icon>
+                </SelectorBarItem>
+                <SelectorBarItem Text="Bluetooth">
+                    <SelectorBarItem.Icon><FontIcon Glyph="&#xE702;" /></SelectorBarItem.Icon>
+                </SelectorBarItem>
+            </SelectorBar>
+
+            <!-- Pairing status -->
+            <InfoBar IsOpen="True" IsClosable="False" Severity="Informational"
+                     Title="Pairing" Message="{x:Bind ViewModel.PairingStatus, Mode=OneWay}"
+                     Visibility="{x:Bind conv:Bind.VisibleIfText(ViewModel.PairingStatus), Mode=OneWay}" />
+
+            <!-- USB -->
+            <StackPanel Spacing="14" Visibility="{x:Bind conv:Bind.Visible(ViewModel.IsUsbSelected), Mode=OneWay}">
+                <Border Style="{StaticResource CardStyle}">
+                    <Grid ColumnSpacing="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Spacing="4">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Ellipse Width="8" Height="8" VerticalAlignment="Center" Fill="{x:Bind conv:Bind.Status(ViewModel.Hub.ServiceAvailable), Mode=OneWay}" />
+                                <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="USB connection" />
+                            </StackPanel>
+                            <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ViewModel.UsbStatus, Mode=OneWay}" />
+                        </StackPanel>
+                        <Button Grid.Column="1" VerticalAlignment="Center" Content="Check service" Command="{x:Bind ViewModel.CheckServiceCommand}" />
+                    </Grid>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="How to connect over USB" />
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="1. Install Apple Devices (Microsoft Store) or iTunes for Windows. It provides the Apple Mobile Device Service and the USB driver." />
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="2. Connect the iPhone with a cable and unlock it." />
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="3. When “Trust This Computer?” appears on the iPhone, tap Trust and enter your passcode. iPhoneMiror waits and continues automatically." />
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Style="{StaticResource SectionTitleStyle}" Text="iPhones on USB" Visibility="{x:Bind conv:Bind.Visible(ViewModel.HasUsbDevices), Mode=OneWay}" />
+                <ItemsRepeater ItemsSource="{x:Bind ViewModel.UsbDevices}">
+                    <ItemsRepeater.Layout><StackLayout Spacing="10" /></ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="vm:DeviceItemViewModel">
+                            <Border Style="{StaticResource CardStyle}">
+                                <Grid ColumnSpacing="14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Spacing="3">
+                                        <TextBlock FontWeight="SemiBold" Text="{x:Bind Name, Mode=OneWay}" />
+                                        <TextBlock Style="{StaticResource CaptionStyle}">
+                                            <Run Text="{x:Bind Model, Mode=OneWay}" /> · <Run Text="{x:Bind IosVersionText, Mode=OneWay}" /> · <Run Text="{x:Bind StatusText, Mode=OneWay}" />
+                                        </TextBlock>
+                                        <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind PairingText, Mode=OneWay}" />
+                                        <TextBlock Style="{StaticResource CaptionStyle}" Foreground="{ThemeResource StatusWarnBrush}" Text="{x:Bind DetailText, Mode=OneWay}"
+                                                   Visibility="{x:Bind conv:Bind.VisibleIfText(DetailText), Mode=OneWay}" />
+                                    </StackPanel>
+                                    <Button Grid.Column="1" VerticalAlignment="Center" Content="Trust / Pair" Click="PairButton_Click" Tag="{x:Bind}"
+                                            Visibility="{x:Bind conv:Bind.Collapsed(IsConnected), Mode=OneWay}" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </StackPanel>
+
+            <!-- Wi-Fi -->
+            <StackPanel Spacing="14" Visibility="{x:Bind conv:Bind.Visible(ViewModel.IsWifiSelected), Mode=OneWay}">
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="8">
+                        <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Wi-Fi connection" />
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="The PC and the iPhone must be on the same Wi-Fi network. Wi-Fi access is enabled once over USB: in Apple Devices (or iTunes), select the iPhone and turn on “Show this iPhone when on Wi-Fi”. Afterwards Apple Mobile Device Service reports the iPhone over the network and iPhoneMiror connects automatically." />
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Style="{StaticResource SectionTitleStyle}" Text="iPhones reachable over Wi-Fi" />
+                <Border Style="{StaticResource CardStyle}" Visibility="{x:Bind conv:Bind.Collapsed(ViewModel.HasWifiDevices), Mode=OneWay}">
+                    <TextBlock Style="{StaticResource CaptionStyle}" Text="None yet. Apple Mobile Device Service has not reported any network-attached iPhone." />
+                </Border>
+                <ItemsRepeater ItemsSource="{x:Bind ViewModel.WifiDevices}">
+                    <ItemsRepeater.Layout><StackLayout Spacing="10" /></ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="vm:DeviceItemViewModel">
+                            <Border Style="{StaticResource CardStyle}">
+                                <StackPanel Spacing="3">
+                                    <TextBlock FontWeight="SemiBold" Text="{x:Bind Name, Mode=OneWay}" />
+                                    <TextBlock Style="{StaticResource CaptionStyle}">
+                                        <Run Text="{x:Bind ConnectionText, Mode=OneWay}" /> · <Run Text="{x:Bind StatusText, Mode=OneWay}" /> · <Run Text="{x:Bind PairingText, Mode=OneWay}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="10">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Device discovery (mDNS)" />
+                                <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ViewModel.WifiStatus, Mode=OneWay}" />
+                            </StackPanel>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Command="{x:Bind ViewModel.ToggleWifiDiscoveryCommand}"
+                                    Content="{x:Bind conv:Bind.ToggleText(ViewModel.IsWifiDiscoveryRunning, 'Stop discovery', 'Start discovery'), Mode=OneWay}" />
+                        </Grid>
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.NetworkDiscovered}">
+                            <ItemsRepeater.Layout><StackLayout Spacing="6" /></ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="vm:DiscoveredItem">
+                                    <Border Style="{StaticResource PillStyle}" CornerRadius="10" Padding="12,8">
+                                        <StackPanel>
+                                            <TextBlock FontWeight="SemiBold" Text="{x:Bind Name}" />
+                                            <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Detail}" />
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- Bluetooth -->
+            <StackPanel Spacing="14" Visibility="{x:Bind conv:Bind.Visible(ViewModel.IsBluetoothSelected), Mode=OneWay}">
+                <InfoBar IsOpen="True" IsClosable="False" Severity="Warning" Title="Bluetooth cannot carry the screen"
+                         Message="Bluetooth is used only to detect and pair nearby Apple devices. Screen mirroring needs USB or Wi-Fi." />
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="10">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Bluetooth" />
+                                <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ViewModel.BluetoothStatus, Mode=OneWay}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <Button Content="Check adapter" Command="{x:Bind ViewModel.RefreshBluetoothStatusCommand}" />
+                                <Button Command="{x:Bind ViewModel.ToggleBluetoothScanCommand}"
+                                        Content="{x:Bind conv:Bind.ToggleText(ViewModel.IsBluetoothScanning, 'Stop scan', 'Start scan'), Mode=OneWay}" />
+                            </StackPanel>
+                        </Grid>
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.BluetoothDiscovered}">
+                            <ItemsRepeater.Layout><StackLayout Spacing="6" /></ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="vm:DiscoveredItem">
+                                    <Border Style="{StaticResource PillStyle}" CornerRadius="10" Padding="12,8">
+                                        <Grid ColumnSpacing="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBlock FontWeight="SemiBold" Text="{x:Bind Name}" />
+                                                <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Detail}" />
+                                            </StackPanel>
+                                            <Button Grid.Column="1" Content="Pair" Click="BluetoothPair_Click" Tag="{x:Bind}" Visibility="{x:Bind conv:Bind.Visible(CanPair)}" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

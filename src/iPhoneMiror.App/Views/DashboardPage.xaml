@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="iPhoneMiror.App.Views.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:iPhoneMiror.App.ViewModels"
+    xmlns:conv="using:iPhoneMiror.App.Converters"
+    Background="Transparent">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="{StaticResource PagePadding}" Spacing="20" MaxWidth="1200" HorizontalAlignment="Stretch">
+
+            <!-- Welcome -->
+            <StackPanel Spacing="2">
+                <TextBlock Style="{StaticResource LabelStyle}" Text="{x:Bind ViewModel.TodayText}" />
+                <TextBlock Style="{StaticResource PageTitleStyle}" Text="{x:Bind ViewModel.Greeting}" />
+                <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0"
+                           Text="Connect your iPhone with USB or Wi-Fi, then mirror and control it from this PC." />
+            </StackPanel>
+
+            <!-- Status cards -->
+            <Grid ColumnSpacing="14">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="6">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Ellipse Width="8" Height="8" Fill="{x:Bind conv:Bind.Status(ViewModel.Hub.ServiceAvailable), Mode=OneWay}" />
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="CONNECTION SERVICE" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource ValueStyle}" FontSize="16" TextWrapping="Wrap" Text="{x:Bind ViewModel.ServiceSummary, Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource LabelStyle}" Text="CONNECTED IPHONES" />
+                        <TextBlock Style="{StaticResource ValueStyle}" FontSize="28" Text="{x:Bind conv:Bind.Count(ViewModel.Hub.ConnectedCount), Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ViewModel.PrimaryDeviceText, Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource LabelStyle}" Text="MIRRORING" />
+                        <TextBlock Style="{StaticResource ValueStyle}" Text="{x:Bind ViewModel.MirroringSummary, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource CaptionStyle}" MaxLines="2" Text="{x:Bind ViewModel.InputSummary, Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="3" Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource LabelStyle}" Text="APPLE ACCOUNT" />
+                        <TextBlock Style="{StaticResource ValueStyle}" FontSize="16" Text="{x:Bind ViewModel.AccountSummary, Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Quick actions -->
+            <Border Style="{StaticResource CardStyle}">
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel VerticalAlignment="Center" Spacing="2">
+                        <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Quick actions" />
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="Start mirroring opens the iPhoneMiror Display window, which you can move to another monitor." />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                        <Button Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.StartMirroringCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE768;" FontSize="14" />
+                                <TextBlock Text="Start Mirroring" />
+                            </StackPanel>
+                        </Button>
+                        <Button Content="Open Display" Command="{x:Bind ViewModel.OpenDisplayCommand}" />
+                        <Button Content="Connect iPhone" Command="{x:Bind ViewModel.GoConnectCommand}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Connected devices -->
+            <StackPanel Spacing="10">
+                <Grid>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="Connected devices" />
+                    <HyperlinkButton HorizontalAlignment="Right" Content="Device Manager" Command="{x:Bind ViewModel.GoDevicesCommand}" />
+                </Grid>
+                <Border Style="{StaticResource CardStyle}" Visibility="{x:Bind conv:Bind.Collapsed(ViewModel.Hub.HasDevices), Mode=OneWay}">
+                    <StackPanel Spacing="6" HorizontalAlignment="Center" Padding="0,18">
+                        <FontIcon Glyph="&#xE8EA;" FontSize="32" Foreground="{ThemeResource FaintTextBrush}" />
+                        <TextBlock HorizontalAlignment="Center" FontWeight="SemiBold" Text="No iPhone detected" />
+                        <TextBlock Style="{StaticResource CaptionStyle}" HorizontalAlignment="Center" TextAlignment="Center" MaxWidth="460"
+                                   Text="Plug in your iPhone with a USB cable and unlock it. iPhones with Wi-Fi sync enabled appear automatically when on the same network." />
+                    </StackPanel>
+                </Border>
+                <ItemsRepeater ItemsSource="{x:Bind ViewModel.Hub.Devices}">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout MinItemWidth="340" MinColumnSpacing="14" MinRowSpacing="14" ItemsStretch="Fill" />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="vm:DeviceItemViewModel">
+                            <Border Style="{StaticResource CardStyle}">
+                                <Grid ColumnSpacing="14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="44" Height="44" CornerRadius="12" Background="{ThemeResource PillBackgroundBrush}" VerticalAlignment="Top">
+                                        <FontIcon Glyph="{x:Bind StatusGlyph, Mode=OneWay}" FontSize="20" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" Spacing="3">
+                                        <TextBlock FontWeight="SemiBold" FontSize="15" TextTrimming="CharacterEllipsis" Text="{x:Bind Name, Mode=OneWay}" />
+                                        <TextBlock Style="{StaticResource CaptionStyle}">
+                                            <Run Text="{x:Bind Model, Mode=OneWay}" /> · <Run Text="{x:Bind IosVersionText, Mode=OneWay}" />
+                                        </TextBlock>
+                                        <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,4,0,0">
+                                            <Ellipse Width="7" Height="7" VerticalAlignment="Center" Fill="{x:Bind conv:Bind.DeviceStatus(IsConnected, IsAttached), Mode=OneWay}" />
+                                            <TextBlock FontSize="12" Text="{x:Bind StatusText, Mode=OneWay}" />
+                                            <TextBlock FontSize="12" Foreground="{ThemeResource FaintTextBrush}" Text="{x:Bind ConnectionText, Mode=OneWay}" />
+                                            <TextBlock FontSize="12" Foreground="{ThemeResource FaintTextBrush}" Text="{x:Bind BatteryText, Mode=OneWay}" />
+                                        </StackPanel>
+                                        <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind PairingText, Mode=OneWay}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </StackPanel>
+
+            <!-- Recent devices -->
+            <StackPanel Spacing="10">
+                <TextBlock Style="{StaticResource SectionTitleStyle}" Text="Recent devices" />
+                <Border Style="{StaticResource CardStyle}" Visibility="{x:Bind conv:Bind.Collapsed(ViewModel.HasRecent), Mode=OneWay}">
+                    <TextBlock Style="{StaticResource CaptionStyle}" Text="iPhones you connect are remembered here (stored locally in SQLite)." />
+                </Border>
+                <Border Style="{StaticResource CardStyle}" Padding="6" Visibility="{x:Bind conv:Bind.Visible(ViewModel.HasRecent), Mode=OneWay}">
+                    <ItemsRepeater ItemsSource="{x:Bind ViewModel.RecentDevices}">
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate x:DataType="vm:RecentDeviceItem">
+                                <Grid Padding="14,10" ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="SemiBold" Text="{x:Bind Name}" />
+                                        <TextBlock Style="{StaticResource CaptionStyle}">
+                                            <Run Text="{x:Bind Model}" /> · <Run Text="{x:Bind Version}" /> · <Run Text="{x:Bind ConnectionText}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource CaptionStyle}" Text="{x:Bind LastSeen}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

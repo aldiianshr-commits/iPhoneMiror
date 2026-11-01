@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="iPhoneMiror.App.Views.MirroringPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:iPhoneMiror.App.ViewModels"
+    xmlns:conv="using:iPhoneMiror.App.Converters"
+    Background="Transparent">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="{StaticResource PagePadding}" Spacing="18" MaxWidth="1100" HorizontalAlignment="Stretch">
+            <StackPanel>
+                <TextBlock Style="{StaticResource PageTitleStyle}" Text="Mirroring" />
+                <TextBlock Style="{StaticResource PageSubtitleStyle}" Margin="0"
+                           Text="Stream the iPhone screen into the separate iPhoneMiror Display window and control it with mouse and keyboard." />
+            </StackPanel>
+
+            <!-- Session -->
+            <Border Style="{StaticResource CardStyle}">
+                <Grid ColumnSpacing="20" RowSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Spacing="4">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Ellipse Width="10" Height="10" VerticalAlignment="Center" Fill="{x:Bind conv:Bind.Indicator(ViewModel.Indicator), Mode=OneWay}" />
+                            <TextBlock FontSize="22" FontWeight="SemiBold" Text="{x:Bind ViewModel.StateText, Mode=OneWay}" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ViewModel.StateDetail, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ViewModel.StatsText, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Top">
+                        <Button Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.StartCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE768;" FontSize="14" />
+                                <TextBlock Text="Start Mirroring" />
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{x:Bind ViewModel.StopCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE71A;" FontSize="14" />
+                                <TextBlock Text="Stop" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="8">
+                        <Button Command="{x:Bind ViewModel.OpenWindowCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE8A7;" FontSize="14" />
+                                <TextBlock Text="Open Separate Window" />
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{x:Bind ViewModel.OpenFullscreenCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE740;" FontSize="14" />
+                                <TextBlock Text="Fullscreen" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Grid ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Source -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="14">
+                        <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Source" />
+                        <ComboBox Header="iPhone" HorizontalAlignment="Stretch" PlaceholderText="No iPhone connected"
+                                  ItemsSource="{x:Bind ViewModel.Hub.Devices}" SelectedItem="{x:Bind ViewModel.SelectedDevice, Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="vm:DeviceItemViewModel">
+                                    <TextBlock>
+                                        <Run Text="{x:Bind Name, Mode=OneWay}" /> · <Run Text="{x:Bind ConnectionText, Mode=OneWay}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <RadioButtons Header="Mirroring method" SelectedIndex="{x:Bind ViewModel.BackendIndex, Mode=TwoWay}">
+                            <RadioButton Content="WebDriverAgent stream (USB or Wi-Fi, supports control)" />
+                            <RadioButton Content="AirPlay via UxPlay (Wi-Fi, view only)" />
+                        </RadioButtons>
+                        <TextBlock Style="{StaticResource CaptionStyle}"
+                                   Text="WebDriverAgent (open source, BSD-3) must be installed and running on the iPhone; building it requires Xcode on a Mac. AirPlay needs UxPlay installed separately; choose Screen Mirroring on the iPhone and pick the receiver. See docs/INSTALLATION.md." />
+                    </StackPanel>
+                </Border>
+
+                <!-- Quality -->
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Display settings" />
+                        <Slider Header="Frame rate" Minimum="5" Maximum="60" StepFrequency="1" Value="{x:Bind ViewModel.FrameRate, Mode=TwoWay}" />
+                        <Slider Header="Image quality" Minimum="10" Maximum="100" StepFrequency="5" Value="{x:Bind ViewModel.Quality, Mode=TwoWay}" />
+                        <Slider Header="Resolution scale" Minimum="25" Maximum="100" StepFrequency="5" Value="{x:Bind ViewModel.ScalingPercent, Mode=TwoWay}" />
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="Applied on the iPhone by WebDriverAgent when mirroring starts. Lower values reduce latency and bandwidth." />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Input -->
+            <Border Style="{StaticResource CardStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Spacing="6">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Ellipse Width="8" Height="8" VerticalAlignment="Center" Fill="{x:Bind conv:Bind.Status(ViewModel.InputAvailable), Mode=OneWay}" />
+                            <TextBlock Style="{StaticResource SectionTitleStyle}" Margin="0" Text="Mouse &amp; keyboard control" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ViewModel.InputStatusText, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource CaptionStyle}"
+                                   Text="Click = tap · double-click = double tap · hold = long press · drag = swipe · wheel = scroll · type to enter text · Ctrl+Shift+H = Home." />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Spacing="8" VerticalAlignment="Center">
+                        <ToggleSwitch OnContent="Control enabled" OffContent="View only" IsOn="{x:Bind ViewModel.IsInputEnabled, Mode=TwoWay}" />
+                        <Button HorizontalAlignment="Stretch" Content="Check input" Command="{x:Bind ViewModel.CheckInputCommand}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

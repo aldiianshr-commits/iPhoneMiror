@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <RootNamespace>iPhoneMiror.App</RootNamespace>
+    <AssemblyName>iPhoneMiror</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
+    <Platforms>x64;ARM64</Platforms>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <SelfContained>true</SelfContained>
+    <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+    <!-- CommunityToolkit.Mvvm partial-property generators require the preview language version. -->
+    <LangVersion>preview</LangVersion>
+    <Description>iPhoneMiror — connect, mirror and control an iPhone from Windows 11.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\iPhoneMiror.Core\iPhoneMiror.Core.csproj" />
+    <ProjectReference Include="..\iPhoneMiror.Connection\iPhoneMiror.Connection.csproj" />
+    <ProjectReference Include="..\iPhoneMiror.DeviceDiscovery\iPhoneMiror.DeviceDiscovery.csproj" />
+    <ProjectReference Include="..\iPhoneMiror.Mirroring\iPhoneMiror.Mirroring.csproj" />
+    <ProjectReference Include="..\iPhoneMiror.Input\iPhoneMiror.Input.csproj" />
+  </ItemGroup>
+</Project>

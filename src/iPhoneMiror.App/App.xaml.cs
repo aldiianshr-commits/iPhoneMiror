@@ -33,6 +33,8 @@ public partial class App : Application
     {
         _args = args;
         InitializeComponent();
+        DebugSettings.XamlResourceReferenceFailed += (_, e) => _logger?.LogError("XAML resource reference failed: {Message}", e.Message);
+        DebugSettings.BindingFailed += (_, e) => _logger?.LogWarning("Binding failed: {Message}", e.Message);
         UnhandledException += (_, e) =>
         {
             _logger?.LogCritical(e.Exception, "Unhandled UI exception.");
@@ -72,7 +74,7 @@ public partial class App : Application
         }
         catch (Exception ex)
         {
-            _logger?.LogCritical(ex, "Startup failed.");
+            _logger?.LogCritical(ex, "Startup failed (HRESULT 0x{HResult:X8}): {Message}", ex.HResult, ex.Message);
             if (IsScreenshotMode) Environment.Exit(4);
             throw;
         }

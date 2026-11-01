@@ -10,6 +10,8 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
     <!-- Data -->
     <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.0" />
+    <!-- Native SQLite >= 3.50.2 (CVE-2025-6965 / GHSA-2m69-gcr7-jv3q); the 2.1.11 native package bundled by default is affected. -->
+    <PackageVersion Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.50.3" />
     <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.0" />
     <!-- Tests -->
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />

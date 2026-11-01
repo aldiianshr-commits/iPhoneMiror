@@ -9,15 +9,6 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- Monochrome accent: white on dark, charcoal on light. -->
-            <Color x:Key="SystemAccentColor">#FFE5E5E7</Color>
-            <Color x:Key="SystemAccentColorLight1">#FFEDEDEF</Color>
-            <Color x:Key="SystemAccentColorLight2">#FFF5F5F7</Color>
-            <Color x:Key="SystemAccentColorLight3">#FFFFFFFF</Color>
-            <Color x:Key="SystemAccentColorDark1">#FF2C2C2E</Color>
-            <Color x:Key="SystemAccentColorDark2">#FF1C1C1E</Color>
-            <Color x:Key="SystemAccentColorDark3">#FF0E0E10</Color>
-
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="AppBackgroundBrush" Color="#FF0A0A0B" />
@@ -50,6 +41,16 @@
                     <SolidColorBrush x:Key="StatusIdleBrush" Color="#FF8E8E93" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+
+            <!-- Monochrome accent: white on dark, charcoal on light. -->
+            <Color x:Key="SystemAccentColor">#FFE5E5E7</Color>
+            <Color x:Key="SystemAccentColorLight1">#FFEDEDEF</Color>
+            <Color x:Key="SystemAccentColorLight2">#FFF5F5F7</Color>
+            <Color x:Key="SystemAccentColorLight3">#FFFFFFFF</Color>
+            <Color x:Key="SystemAccentColorDark1">#FF2C2C2E</Color>
+            <Color x:Key="SystemAccentColorDark2">#FF1C1C1E</Color>
+            <Color x:Key="SystemAccentColorDark3">#FF0E0E10</Color>
+
 
             <!-- Shared styles (kept in this dictionary so they can resolve the theme brushes above). -->
             <CornerRadius x:Key="CardCornerRadius">14</CornerRadius>

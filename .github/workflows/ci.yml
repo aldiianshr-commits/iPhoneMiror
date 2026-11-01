@@ -80,6 +80,10 @@ jobs:
         run: |
           dotnet publish src/iPhoneMiror.App/iPhoneMiror.App.csproj -c Release -r win-arm64 -p:Platform=ARM64 -o publish/win-arm64 2>&1 | Tee-Object -FilePath build-arm64.txt
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Inspect publish output
+        run: |
+          Get-ChildItem publish/win-x64 -Recurse -Include *.pri,*.xbf,*.xaml,iPhoneMiror.exe,iPhoneMiror.dll | ForEach-Object { "{0}  {1}" -f $_.FullName.Replace("$PWD\",""), $_.Length } | Tee-Object -FilePath publish-inspect.txt
+          Get-ChildItem src/iPhoneMiror.App/obj -Recurse -Filter App.g.i.cs | Select-Object -First 1 | ForEach-Object { "== $($_.FullName)"; Get-Content $_.FullName } | Tee-Object -FilePath publish-inspect.txt -Append
       - name: Smoke test and screenshots (win-x64)
         env:
           IPHONEMIROR_DATA_DIR: ${{ github.workspace }}\appdata
@@ -125,7 +129,7 @@ jobs:
         if: always()
         run: |
           New-Item -ItemType Directory -Force ci-out | Out-Null
-          Copy-Item build-x64.txt, build-arm64.txt, smoke.txt, installer.txt ci-out/ -ErrorAction SilentlyContinue
+          Copy-Item build-x64.txt, build-arm64.txt, smoke.txt, installer.txt, publish-inspect.txt ci-out/ -ErrorAction SilentlyContinue
           Copy-Item publish-x64.binlog ci-out/ -ErrorAction SilentlyContinue
           if (Test-Path screenshots) { Copy-Item screenshots ci-out/screenshots -Recurse }
           if (Test-Path dist/SHA256SUMS.txt) { Copy-Item dist/SHA256SUMS.txt ci-out/ }

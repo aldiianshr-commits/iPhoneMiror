@@ -137,7 +137,7 @@ public sealed partial class MainWindow : Window
             {
                 Navigate(order[i]);
                 await Task.Delay(2500);
-                await ScreenshotCapture.SaveAsync(RootGrid, Path.Combine(directory, $"{i + 1:00}-{order[i]}.png"));
+                await WithTimeout(ScreenshotCapture.SaveAsync(RootGrid, Path.Combine(directory, $"{i + 1:00}-{order[i]}.png")), order[i]);
                 _logger.LogInformation("Captured {Page}.", order[i]);
             }
             catch (Exception ex)
@@ -150,7 +150,7 @@ public sealed partial class MainWindow : Window
         {
             var display = _windows.ShowDisplayWindow(fullscreen: false);
             await Task.Delay(2500);
-            await ScreenshotCapture.SaveAsync((UIElement)display.Content, Path.Combine(directory, "07-display-window.png"));
+            await WithTimeout(ScreenshotCapture.SaveAsync((UIElement)display.Content, Path.Combine(directory, "07-display-window.png")), "display");
             display.Close();
         }
         catch (Exception ex)
@@ -159,5 +159,13 @@ public sealed partial class MainWindow : Window
             _logger.LogError(ex, "Capturing the Display window failed.");
         }
         return failures == 0 ? 0 : 2;
+    }
+
+    private async Task WithTimeout(Task capture, string what)
+    {
+        _logger.LogInformation("Capturing {What}…", what);
+        if (await Task.WhenAny(capture, Task.Delay(TimeSpan.FromSeconds(20))) != capture)
+            throw new TimeoutException($"Rendering {what} did not complete within 20 s.");
+        await capture;
     }
 }

@@ -81,15 +81,26 @@ jobs:
           dotnet publish src/iPhoneMiror.App/iPhoneMiror.App.csproj -c Release -r win-arm64 -p:Platform=ARM64 -o publish/win-arm64 2>&1 | Tee-Object -FilePath build-arm64.txt
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Smoke test and screenshots (win-x64)
+        env:
+          IPHONEMIROR_DATA_DIR: ${{ github.workspace }}\appdata
         run: |
           New-Item -ItemType Directory -Force screenshots | Out-Null
           $exe = Resolve-Path publish/win-x64/iPhoneMiror.exe
           $p = Start-Process -FilePath $exe -ArgumentList @('--capture-screenshots', (Resolve-Path screenshots).Path) -PassThru
-          if (-not $p.WaitForExit(240000)) { Stop-Process -Id $p.Id -Force; Write-Error "App did not exit within 4 minutes"; exit 1 }
-          "Exit code: $($p.ExitCode)" | Tee-Object -FilePath smoke.txt
+          $exited = $p.WaitForExit(200000)
+          if (-not $exited) {
+            Add-Type -AssemblyName System.Windows.Forms, System.Drawing
+            $b = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+            $bmp = New-Object System.Drawing.Bitmap $b.Width, $b.Height
+            [System.Drawing.Graphics]::FromImage($bmp).CopyFromScreen($b.Location, [System.Drawing.Point]::Empty, $b.Size)
+            $bmp.Save("$PWD\screenshots\desktop-on-timeout.png")
+            Stop-Process -Id $p.Id -Force
+          }
+          $code = if ($exited) { $p.ExitCode } else { -1 }
+          "Exited: $exited  Exit code: $code" | Tee-Object -FilePath smoke.txt
           Get-ChildItem screenshots | Format-Table Name, Length | Out-String | Tee-Object -FilePath smoke.txt -Append
-          Get-ChildItem "$env:LOCALAPPDATA\iPhoneMiror\logs" -ErrorAction SilentlyContinue | ForEach-Object { Get-Content $_.FullName -Tail 200 } | Out-File -Append smoke.txt
-          if ($p.ExitCode -ne 0) { exit $p.ExitCode }
+          Get-ChildItem appdata\logs -ErrorAction SilentlyContinue | ForEach-Object { Get-Content $_.FullName } | Tee-Object -FilePath smoke.txt -Append
+          if ($code -ne 0) { exit 1 }
           if ((Get-ChildItem screenshots -Filter *.png).Count -lt 7) { Write-Error "Expected at least 7 screenshots"; exit 1 }
       - name: Build installers (Inno Setup)
         run: |

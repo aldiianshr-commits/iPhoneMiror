@@ -55,6 +55,31 @@ public partial class App : Application
 
     protected override async void OnLaunched(LaunchActivatedEventArgs e)
     {
+        if (IsScreenshotMode)
+        {
+            // Watchdog: a CI documentation run must never hang.
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(170));
+                _logger?.LogCritical("Screenshot run watchdog expired.");
+                await Task.Delay(500);
+                Environment.Exit(3);
+            });
+        }
+        try
+        {
+            await LaunchAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger?.LogCritical(ex, "Startup failed.");
+            if (IsScreenshotMode) Environment.Exit(4);
+            throw;
+        }
+    }
+
+    private async Task LaunchAsync()
+    {
         var paths = new AppPaths(Environment.GetEnvironmentVariable("IPHONEMIROR_DATA_DIR"));
         paths.EnsureCreated();
 
@@ -86,12 +111,14 @@ public partial class App : Application
         _services.GetRequiredService<WindowService>().Main = main;
         themes.Register(main);
 
+        _logger.LogInformation("Main window created.");
         var minimized = _args.Contains("--minimized") || (settings.Startup.StartMinimized && !IsScreenshotMode);
         main.Activate();
         if (minimized) main.Minimize();
 
         await _services.GetRequiredService<IAppleAccountService>().LoadAsync();
         await _services.GetRequiredService<IDeviceConnectionService>().StartAsync();
+        _logger.LogInformation("Services started.");
 
         if (IsScreenshotMode)
         {

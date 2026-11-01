@@ -11,10 +11,14 @@ public sealed class ThemeService
     private readonly ISettingsStore _settings;
     private readonly List<Window> _windows = [];
 
-    public ThemeService(ISettingsStore settings)
+    private readonly UiDispatcher _ui;
+
+    public ThemeService(ISettingsStore settings, UiDispatcher ui)
     {
         _settings = settings;
-        _settings.Changed += (_, _) => ApplyAll();
+        _ui = ui;
+        // Settings are saved on background threads; window changes must happen on the UI thread.
+        _settings.Changed += (_, _) => _ui.Post(ApplyAll);
     }
 
     /// <summary>Set by screenshot mode to force solid backgrounds (Mica is not captured by RenderTargetBitmap).</summary>

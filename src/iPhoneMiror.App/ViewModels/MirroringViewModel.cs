@@ -23,6 +23,7 @@ public sealed partial class MirroringViewModel : ObservableObject
     private readonly UiDispatcher _ui;
     private readonly ILogger<MirroringViewModel> _logger;
     private DispatcherQueueTimer? _statsTimer;
+    private bool _initializing;
 
     public MirroringViewModel(IMirroringService mirroring, IInputForwarder input, ISettingsStore settings, IDeviceConnectionService devices,
         DeviceHub hub, WindowService windows, UiDispatcher ui, ILogger<MirroringViewModel> logger)
@@ -37,11 +38,13 @@ public sealed partial class MirroringViewModel : ObservableObject
         Hub = hub;
 
         var perf = settings.Current.Performance;
+        _initializing = true;
         FrameRate = perf.FrameRate;
         Quality = perf.JpegQuality;
         ScalingPercent = perf.ScalingPercent;
         BackendIndex = settings.Current.Mirroring.Backend == MirroringBackendKind.AirPlayUxPlay ? 1 : 0;
         IsInputEnabled = settings.Current.Mirroring.EnableInputForwarding;
+        _initializing = false;
 
         _mirroring.StateChanged += (_, e) => _ui.Post(() => ApplyState(e.State, e.Message));
         _input.AvailabilityChanged += (_, a) => _ui.Post(() => ApplyInput(a));
@@ -95,6 +98,7 @@ public sealed partial class MirroringViewModel : ObservableObject
     partial void OnBackendIndexChanged(int value)
     {
         OnPropertyChanged(nameof(IsAirPlay));
+        if (_initializing) return;
         _ = _settings.UpdateAsync(s => s.Mirroring.Backend = value == 1 ? MirroringBackendKind.AirPlayUxPlay : MirroringBackendKind.WebDriverAgent);
         StartCommand.NotifyCanExecuteChanged();
     }
@@ -102,14 +106,21 @@ public sealed partial class MirroringViewModel : ObservableObject
     partial void OnFrameRateChanged(double value) => SavePerformance();
     partial void OnQualityChanged(double value) => SavePerformance();
     partial void OnScalingPercentChanged(double value) => SavePerformance();
-    partial void OnIsInputEnabledChanged(bool value) => _ = _settings.UpdateAsync(s => s.Mirroring.EnableInputForwarding = value);
+    partial void OnIsInputEnabledChanged(bool value)
+    {
+        if (!_initializing) _ = _settings.UpdateAsync(s => s.Mirroring.EnableInputForwarding = value);
+    }
 
-    private void SavePerformance() => _ = _settings.UpdateAsync(s =>
+    private void SavePerformance()
+    {
+        if (_initializing) return;
+        _ = _settings.UpdateAsync(s =>
     {
         s.Performance.FrameRate = (int)FrameRate;
         s.Performance.JpegQuality = (int)Quality;
         s.Performance.ScalingPercent = (int)ScalingPercent;
     });
+    }
 
     private bool CanStart() => !IsRunning && (IsAirPlay || SelectedDevice is { IsAttached: true });
 

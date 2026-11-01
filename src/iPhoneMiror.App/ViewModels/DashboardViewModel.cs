@@ -15,16 +15,22 @@ public sealed partial class DashboardViewModel : ObservableObject
     private readonly MirroringViewModel _mirroring;
     private readonly IAppleAccountService _account;
 
-    public DashboardViewModel(DeviceHub hub, IDeviceRepository repository, NavigationService navigation, MirroringViewModel mirroring, IAppleAccountService account)
+    public DashboardViewModel(DeviceHub hub, IDeviceRepository repository, NavigationService navigation, MirroringViewModel mirroring, IAppleAccountService account, UiDispatcher ui)
     {
         Hub = hub;
         _repository = repository;
         _navigation = navigation;
         _mirroring = mirroring;
         _account = account;
-        hub.DevicesChanged += async (_, _) => { OnPropertyChanged(nameof(PrimaryDeviceText)); await LoadRecentAsync(); };
+        hub.DevicesChanged += async (_, _) =>
+        {
+            OnPropertyChanged(nameof(PrimaryDeviceText));
+            StartMirroringCommand.NotifyCanExecuteChanged();
+            await LoadRecentAsync();
+        };
+        _mirroring.StartCommand.CanExecuteChanged += (_, _) => StartMirroringCommand.NotifyCanExecuteChanged();
         hub.PropertyChanged += (_, e) => { if (e.PropertyName is nameof(DeviceHub.ServiceAvailable) or nameof(DeviceHub.ServiceMessage)) OnPropertyChanged(nameof(ServiceSummary)); };
-        _account.StatusChanged += (_, _) => OnPropertyChanged(nameof(AccountSummary));
+        _account.StatusChanged += (_, _) => ui.Post(() => OnPropertyChanged(nameof(AccountSummary)));
         _mirroring.PropertyChanged += (_, e) =>
         {
             if (e.PropertyName is nameof(MirroringViewModel.StateText)) OnPropertyChanged(nameof(MirroringSummary));
@@ -86,10 +92,13 @@ public sealed partial class DashboardViewModel : ObservableObject
         }
     }
 
-    [RelayCommand]
+    private bool CanStartMirroring() => (Hub.FirstConnected is { IsAttached: true } || _mirroring.IsAirPlay) && !_mirroring.IsRunning;
+
+    [RelayCommand(CanExecute = nameof(CanStartMirroring))]
     private async Task StartMirroringAsync()
     {
         if (Hub.FirstConnected is { } d) _mirroring.SelectedDevice = d;
+        if (!_mirroring.StartCommand.CanExecute(null)) return;
         await _mirroring.StartCommand.ExecuteAsync(null);
         _mirroring.OpenWindowCommand.Execute(null);
     }

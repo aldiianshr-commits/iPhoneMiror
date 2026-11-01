@@ -30,7 +30,7 @@
                     <StackPanel Spacing="6">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <Ellipse Width="8" Height="8" Fill="{x:Bind conv:Bind.Status(ViewModel.Hub.ServiceAvailable), Mode=OneWay}" />
-                            <TextBlock Style="{StaticResource LabelStyle}" Text="CONNECTION SERVICE" />
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="SERVICE" />
                         </StackPanel>
                         <TextBlock Style="{StaticResource ValueStyle}" FontSize="16" TextWrapping="Wrap" Text="{x:Bind ViewModel.ServiceSummary, Mode=OneWay}" />
                     </StackPanel>

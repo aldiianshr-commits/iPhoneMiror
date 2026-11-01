@@ -59,8 +59,9 @@ public sealed class DeviceConnectionService : IDeviceConnectionService
     {
         if (_cts is not null) return Task.CompletedTask;
         _cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        _listenTask = Task.Run(() => ListenLoopAsync(_cts.Token), CancellationToken.None);
-        _refreshTask = Task.Run(() => RefreshLoopAsync(_cts.Token), CancellationToken.None);
+        var token = _cts.Token; // captured now: StopAsync may clear _cts before the tasks start
+        _listenTask = Task.Run(() => ListenLoopAsync(token), CancellationToken.None);
+        _refreshTask = Task.Run(() => RefreshLoopAsync(token), CancellationToken.None);
         return Task.CompletedTask;
     }
 

@@ -12,13 +12,13 @@
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
     <WindowsPackageType>None</WindowsPackageType>
+    <!-- Required for unpackaged apps too: generates iPhoneMiror.pri, which holds the compiled XAML (App.xaml, pages). -->
+    <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SelfContained>true</SelfContained>
     <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
     <!-- CommunityToolkit.Mvvm partial-property generators require the preview language version. -->
     <LangVersion>preview</LangVersion>
-    <!-- TEMP diagnostics: text XAML gives line numbers in XamlParseException. -->
-    <DisableXbfGeneration>true</DisableXbfGeneration>
     <Description>iPhoneMiror — connect, mirror and control an iPhone from Windows 11.</Description>
   </PropertyGroup>
 

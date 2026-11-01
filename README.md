@@ -13,7 +13,8 @@
   <img src="https://img.shields.io/badge/license-MIT-111" alt="MIT" />
 </p>
 
-> **Honest status:** the app builds, installs, launches and passes its unit and protocol-level integration tests in CI.
+> **Honest status:** the app builds for x64 and ARM64, the x64 build launches and renders every page in CI (Windows Server 2025 runner),
+> and 68 unit tests + 12 protocol-level integration tests pass on Windows and Linux.
 > It has **not yet been verified with a physical iPhone** — see [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
 > Apple's own *iPhone Mirroring* protocol is private and Mac-only; iPhoneMiror uses documented/open alternatives instead.
 
@@ -45,6 +46,16 @@ service shows as offline there):
 | ![Account](docs/screenshots/05-account.png) | ![Settings](docs/screenshots/06-settings.png) |
 
 **iPhoneMiror Display** window: ![Display](docs/screenshots/07-display-window.png)
+
+## Test results
+
+| Suite | Windows | Linux | Covers |
+|---|---|---|---|
+| Unit tests | 68 / 68 passed | 68 / 68 passed | plist (XML + binary), usbmux, lockdown framing, pairing certificates, DNS/mDNS, MJPEG, coordinate/gesture/keyboard mapping, WebDriverAgent routes, Sign in with Apple token validation, SQLite, settings, compatibility, performance |
+| Integration tests | 12 / 12 passed | 12 / 12 passed | usbmux → lockdown → Trust dialog → pairing → TLS session → device info/battery, re-plug reconnect, denied trust, service down; input and MJPEG mirroring through a usbmux tunnel to an emulated WebDriverAgent |
+| UI smoke test | passed | — | launches `iPhoneMiror.exe`, renders all pages and the Display window, records resource usage |
+
+Integration tests use protocol emulators, not a physical iPhone.
 
 ## Download
 

@@ -8,9 +8,13 @@
 
 | Target | Status |
 |---|---|
-| Windows 11 x64 | Builds in CI (`windows-latest`); app launched and all pages rendered in CI (screenshots in the README) |
-| Windows 11 ARM64 | Builds in CI (cross-compiled); not executed — no ARM64 runner used |
-| Windows 10 (1809+) | Should work (minimum OS 10.0.17763); Mica backdrop falls back to a solid background |
+| Windows 11 x64 | Builds in CI. The x64 build was **launched in CI on Windows Server 2025** (build 26100, the same platform release as Windows 11 24H2): all pages and the Display window render, screenshots are captured automatically. Not yet run on a Windows 11 desktop by the maintainers |
+| Windows 11 ARM64 | Builds in CI (cross-compiled) and is packaged with its own installer; not executed (no ARM64 runner) |
+| Windows 10 (1809+) | Expected to work (minimum OS 10.0.17763); Mica falls back to a solid background. Not tested |
+
+Measured in CI (Windows Server 2025 runner, software rendering, no iPhone): startup to main window ≈ 0.5 s; after visiting all
+six pages and opening the Display window: working set ≈ 216 MB (peak ≈ 227 MB), private bytes ≈ 108 MB, managed heap ≈ 2.5 MB.
+MJPEG parsing: 6,000–12,000 frames/s for 150 KB frames with ~1.0 byte allocated per input byte (each frame copied once).
 
 Requirements: **Apple Mobile Device Service**, installed with *Apple Devices* (Microsoft Store) or *iTunes for Windows*. The app is
 self-contained (.NET runtime and Windows App SDK included).
@@ -31,7 +35,8 @@ to `CompatibilityEvaluator` and record the result below.
 
 | Date | Device | iOS | Connection | Result | Tester |
 |---|---|---|---|---|---|
-| — | — | — | — | No hardware verification yet | — |
+| 2026-11-01 | none (CI, protocol emulators) | — | USB (usbmux/lockdown/TLS emulated) | 68 unit + 12 integration tests pass on Windows and Linux | GitHub Actions |
+| — | real iPhone | 26.x / 27.x | USB / Wi-Fi | **Not yet verified** | — |
 
 ### How to verify
 

@@ -79,7 +79,7 @@ public partial class App : Application
             {
                 try { XamlDiagnostics.Run(_logger); }
                 catch (Exception dex) { _logger.LogError(dex, "XAML diagnostics failed."); }
-                await Task.Delay(1000);
+                _services?.GetService<FileLoggerProvider>()?.Dispose();
             }
             if (IsScreenshotMode) Environment.Exit(4);
             throw;

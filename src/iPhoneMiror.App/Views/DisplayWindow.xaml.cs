@@ -16,6 +16,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
 using Windows.System;
+using DispatcherQueueTimer = Microsoft.UI.Dispatching.DispatcherQueueTimer;
 
 namespace iPhoneMiror.App.Views;
 
@@ -63,7 +64,7 @@ public sealed partial class DisplayWindow : Window
         }
         themes.Register(this);
 
-        var dq = DispatcherQueue.GetForCurrentThread();
+        var dq = DispatcherQueue;
         _flushTimer = dq.CreateTimer();
         _flushTimer.Interval = TimeSpan.FromMilliseconds(50);
         _flushTimer.Tick += (_, _) => _ = DispatchGesturesAsync(_gestures.Flush(DateTimeOffset.UtcNow));

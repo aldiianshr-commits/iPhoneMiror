@@ -1,5 +1,4 @@
 using System.Globalization;
-using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using iPhoneMiror.Core.Abstractions;
@@ -66,7 +65,11 @@ public sealed class WdaClient : IAsyncDisposable
     public async Task<string> CreateSessionAsync(CancellationToken ct = default)
     {
         var body = new JsonObject { ["capabilities"] = new JsonObject { ["alwaysMatch"] = new JsonObject() } };
-        using var response = await _http.PostAsJsonAsync("session", body, ct).ConfigureAwait(false);
+        using var request = new HttpRequestMessage(HttpMethod.Post, "session") { Content = JsonBody(body) };
+        HttpResponseMessage response;
+        try { response = await _http.SendAsync(request, ct).ConfigureAwait(false); }
+        catch (HttpRequestException ex) { throw new WdaException("WebDriverAgent is not reachable (POST /session). Make sure WebDriverAgent is running on the iPhone.", ex); }
+        using var _ = response;
         var root = await ReadRootAsync(response, "POST session", ct).ConfigureAwait(false);
         _sessionId = root?["sessionId"]?.GetValue<string>() ?? root?["value"]?["sessionId"]?.GetValue<string>()
             ?? throw new WdaException("WebDriverAgent did not return a session id.");
@@ -161,7 +164,7 @@ public sealed class WdaClient : IAsyncDisposable
     private async Task<JsonNode?> SendAsync(HttpMethod method, string path, JsonObject? body, CancellationToken ct)
     {
         using var request = new HttpRequestMessage(method, path);
-        if (body is not null) request.Content = JsonContent.Create(body);
+        if (body is not null) request.Content = JsonBody(body);
         HttpResponseMessage response;
         try
         {
@@ -176,6 +179,14 @@ public sealed class WdaClient : IAsyncDisposable
             var root = await ReadRootAsync(response, $"{method} /{path}", ct).ConfigureAwait(false);
             return root?["value"];
         }
+    }
+
+    /// <summary>JSON body with an explicit Content-Length (WebDriverAgent's embedded HTTP server does not need chunked bodies).</summary>
+    private static ByteArrayContent JsonBody(JsonObject body)
+    {
+        var content = new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(body.ToJsonString()));
+        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
+        return content;
     }
 
     private static async Task<JsonNode?> ReadRootAsync(HttpResponseMessage response, string what, CancellationToken ct)

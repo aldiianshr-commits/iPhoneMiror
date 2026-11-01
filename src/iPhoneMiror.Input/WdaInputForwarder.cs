@@ -51,6 +51,9 @@ public sealed class WdaInputForwarder : IInputForwarder, IMirrorQualityConfigura
         catch (Exception ex) when (ex is WdaException or IOException or HttpRequestException or TaskCanceledException)
         {
             _logger.LogInformation(ex, "WebDriverAgent not available for {Udid}.", device.Udid);
+            if (_client is not null) await _client.DisposeAsync().ConfigureAwait(false);
+            _client = null;
+            ScreenSizePoints = null;
             SetAvailability(false, "Input control needs WebDriverAgent running on the iPhone: " + ex.Message);
         }
         finally

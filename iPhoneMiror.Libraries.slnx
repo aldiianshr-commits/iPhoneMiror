@@ -1,0 +1,14 @@
+<Solution>
+  <!-- Cross-platform libraries and tests only (no WinUI). Used by CI on Linux and for fast local test runs. -->
+  <Folder Name="/src/">
+    <Project Path="src/iPhoneMiror.Core/iPhoneMiror.Core.csproj" />
+    <Project Path="src/iPhoneMiror.Connection/iPhoneMiror.Connection.csproj" />
+    <Project Path="src/iPhoneMiror.DeviceDiscovery/iPhoneMiror.DeviceDiscovery.csproj" />
+    <Project Path="src/iPhoneMiror.Mirroring/iPhoneMiror.Mirroring.csproj" />
+    <Project Path="src/iPhoneMiror.Input/iPhoneMiror.Input.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/iPhoneMiror.UnitTests/iPhoneMiror.UnitTests.csproj" />
+    <Project Path="tests/iPhoneMiror.IntegrationTests/iPhoneMiror.IntegrationTests.csproj" />
+  </Folder>
+</Solution>

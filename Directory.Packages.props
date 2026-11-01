@@ -1,0 +1,20 @@
+<Project>
+  <ItemGroup>
+    <!-- Windows / UI -->
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.8.260416003" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <!-- Hosting / DI / logging -->
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
+    <!-- Data -->
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.0" />
+    <!-- Tests -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+  </ItemGroup>
+</Project>

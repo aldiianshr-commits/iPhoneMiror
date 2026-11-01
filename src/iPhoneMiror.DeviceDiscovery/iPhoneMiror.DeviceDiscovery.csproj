@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- net10.0 for cross-platform tests; the Windows target adds Bluetooth LE discovery through WinRT APIs. -->
+    <TargetFrameworks>net10.0;net10.0-windows10.0.19041.0</TargetFrameworks>
+    <RootNamespace>iPhoneMiror.DeviceDiscovery</RootNamespace>
+    <Description>Wi-Fi (mDNS/DNS-SD) and Bluetooth discovery of iPhones.</Description>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net10.0-windows10.0.19041.0'">10.0.17763.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iPhoneMiror.Core\iPhoneMiror.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'net10.0-windows10.0.19041.0'">
+    <Compile Remove="Bluetooth\Windows*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="iPhoneMiror.UnitTests" />
+    <InternalsVisibleTo Include="iPhoneMiror.IntegrationTests" />
+  </ItemGroup>
+</Project>

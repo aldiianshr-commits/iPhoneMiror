@@ -1,0 +1,19 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="ARM64" />
+  </Configurations>
+  <Folder Name="/src/">
+    <Project Path="src/iPhoneMiror.Core/iPhoneMiror.Core.csproj" />
+    <Project Path="src/iPhoneMiror.Connection/iPhoneMiror.Connection.csproj" />
+    <Project Path="src/iPhoneMiror.DeviceDiscovery/iPhoneMiror.DeviceDiscovery.csproj" />
+    <Project Path="src/iPhoneMiror.Mirroring/iPhoneMiror.Mirroring.csproj" />
+    <Project Path="src/iPhoneMiror.Input/iPhoneMiror.Input.csproj" />
+    <Project Path="src/iPhoneMiror.App/iPhoneMiror.App.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/iPhoneMiror.UnitTests/iPhoneMiror.UnitTests.csproj" />
+    <Project Path="tests/iPhoneMiror.IntegrationTests/iPhoneMiror.IntegrationTests.csproj" />
+  </Folder>
+</Solution>

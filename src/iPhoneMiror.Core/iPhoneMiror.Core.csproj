@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>iPhoneMiror.Core</RootNamespace>
+    <Description>Shared models, abstractions, property-list codec, persistence and compatibility rules for iPhoneMiror.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="iPhoneMiror.UnitTests" />
+    <InternalsVisibleTo Include="iPhoneMiror.IntegrationTests" />
+  </ItemGroup>
+</Project>

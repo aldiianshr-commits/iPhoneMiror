@@ -1,0 +1,167 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  tests:
+    name: Unit & integration tests (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Build libraries
+        run: dotnet build iPhoneMiror.Libraries.slnx -c Release 2>&1 | tee build-libs.txt; exit ${PIPESTATUS[0]}
+      - name: Unit tests
+        run: |
+          dotnet test tests/iPhoneMiror.UnitTests/iPhoneMiror.UnitTests.csproj -c Release --no-build \
+            --logger "trx;LogFileName=unit.trx" --logger "console;verbosity=normal" --results-directory TestResults \
+            --collect:"XPlat Code Coverage" 2>&1 | tee unit-tests.txt; exit ${PIPESTATUS[0]}
+      - name: Integration tests
+        if: always()
+        run: |
+          dotnet test tests/iPhoneMiror.IntegrationTests/iPhoneMiror.IntegrationTests.csproj -c Release --no-build \
+            --logger "trx;LogFileName=integration.trx" --logger "console;verbosity=normal" --results-directory TestResults \
+            --blame-hang-timeout 5m 2>&1 | tee integration-tests.txt; exit ${PIPESTATUS[0]}
+      - name: Collect logs
+        if: always()
+        run: |
+          mkdir -p ci-out
+          cp build-libs.txt unit-tests.txt integration-tests.txt ci-out/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tests-${{ matrix.os }}
+          path: |
+            ci-out/
+            TestResults/
+
+  app:
+    name: Build iPhoneMiror.exe, installer and screenshots
+    if: hashFiles('src/iPhoneMiror.App/iPhoneMiror.App.csproj') != ''
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Publish win-x64
+        run: |
+          dotnet publish src/iPhoneMiror.App/iPhoneMiror.App.csproj -c Release -r win-x64 -p:Platform=x64 -o publish/win-x64 -bl:publish-x64.binlog 2>&1 | Tee-Object -FilePath build-x64.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Publish win-arm64
+        run: |
+          dotnet publish src/iPhoneMiror.App/iPhoneMiror.App.csproj -c Release -r win-arm64 -p:Platform=ARM64 -o publish/win-arm64 2>&1 | Tee-Object -FilePath build-arm64.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Smoke test and screenshots (win-x64)
+        run: |
+          New-Item -ItemType Directory -Force screenshots | Out-Null
+          $exe = Resolve-Path publish/win-x64/iPhoneMiror.exe
+          $p = Start-Process -FilePath $exe -ArgumentList @('--capture-screenshots', (Resolve-Path screenshots).Path) -PassThru
+          if (-not $p.WaitForExit(240000)) { Stop-Process -Id $p.Id -Force; Write-Error "App did not exit within 4 minutes"; exit 1 }
+          "Exit code: $($p.ExitCode)" | Tee-Object -FilePath smoke.txt
+          Get-ChildItem screenshots | Format-Table Name, Length | Out-String | Tee-Object -FilePath smoke.txt -Append
+          Get-ChildItem "$env:LOCALAPPDATA\iPhoneMiror\logs" -ErrorAction SilentlyContinue | ForEach-Object { Get-Content $_.FullName -Tail 200 } | Out-File -Append smoke.txt
+          if ($p.ExitCode -ne 0) { exit $p.ExitCode }
+          if ((Get-ChildItem screenshots -Filter *.png).Count -lt 7) { Write-Error "Expected at least 7 screenshots"; exit 1 }
+      - name: Build installers (Inno Setup)
+        run: |
+          if (-not (Get-Command iscc -ErrorAction SilentlyContinue)) {
+            $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+            if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress | Out-Null }
+          }
+          $iscc = (Get-Command iscc -ErrorAction SilentlyContinue).Source
+          if (-not $iscc) { $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" }
+          & $iscc /DArch=x64 /DSourceDir="$PWD\publish\win-x64" installer/iPhoneMiror.iss 2>&1 | Tee-Object -FilePath installer.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & $iscc /DArch=arm64 /DSourceDir="$PWD\publish\win-arm64" installer/iPhoneMiror.iss 2>&1 | Tee-Object -FilePath installer.txt -Append
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Package portable builds
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Compress-Archive -Path publish/win-x64/* -DestinationPath dist/iPhoneMiror-win-x64-portable.zip -Force
+          Compress-Archive -Path publish/win-arm64/* -DestinationPath dist/iPhoneMiror-win-arm64-portable.zip -Force
+          Copy-Item installer/Output/*.exe dist/
+          Get-ChildItem dist | ForEach-Object { "{0}  {1:N0} bytes  SHA256 {2}" -f $_.Name, $_.Length, (Get-FileHash $_.FullName).Hash } | Tee-Object -FilePath dist/SHA256SUMS.txt
+      - name: Collect logs
+        if: always()
+        run: |
+          New-Item -ItemType Directory -Force ci-out | Out-Null
+          Copy-Item build-x64.txt, build-arm64.txt, smoke.txt, installer.txt ci-out/ -ErrorAction SilentlyContinue
+          Copy-Item publish-x64.binlog ci-out/ -ErrorAction SilentlyContinue
+          if (Test-Path screenshots) { Copy-Item screenshots ci-out/screenshots -Recurse }
+          if (Test-Path dist/SHA256SUMS.txt) { Copy-Item dist/SHA256SUMS.txt ci-out/ }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: app-logs
+          path: ci-out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: iPhoneMiror-windows
+          path: dist/
+      - name: Publish rolling "nightly" pre-release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete nightly --yes --cleanup-tag 2>$null
+          $notes = "Automated build of $env:GITHUB_SHA. Not verified on a real iPhone; see docs/COMPATIBILITY.md."
+          gh release create nightly dist/*.exe dist/*.zip dist/SHA256SUMS.txt --prerelease --title "iPhoneMiror nightly ($($env:GITHUB_SHA.Substring(0,7)))" --notes $notes --target $env:GITHUB_SHA
+      - name: Publish tagged release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create $env:GITHUB_REF_NAME dist/*.exe dist/*.zip dist/SHA256SUMS.txt --title "iPhoneMiror $env:GITHUB_REF_NAME" --generate-notes
+
+  report:
+    name: Publish CI report branch
+    needs: [tests, app]
+    if: always() && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Commit results to ci-results branch
+        env:
+          RUN: ${{ github.run_number }}
+          SHA: ${{ github.sha }}
+          TESTS: ${{ needs.tests.result }}
+          APP: ${{ needs.app.result }}
+        run: |
+          set -e
+          git init -q out && cd out
+          git checkout -q --orphan ci-results
+          mkdir -p latest
+          cp -r ../artifacts/* latest/ 2>/dev/null || true
+          find latest -name '*.binlog' -size +20M -delete || true
+          find latest -name '*.trx' -size +5M -delete || true
+          printf 'run: %s\nsha: %s\ntests: %s\napp: %s\ndate: %s\n' "$RUN" "$SHA" "$TESTS" "$APP" "$(date -u)" > latest/STATUS.txt
+          git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "CI results run $RUN ($SHA)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ci-results

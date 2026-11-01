@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\iPhoneMiror.Core\iPhoneMiror.Core.csproj" />
+    <ProjectReference Include="..\..\src\iPhoneMiror.Connection\iPhoneMiror.Connection.csproj" />
+    <ProjectReference Include="..\..\src\iPhoneMiror.Mirroring\iPhoneMiror.Mirroring.csproj" />
+    <ProjectReference Include="..\..\src\iPhoneMiror.Input\iPhoneMiror.Input.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+</Project>

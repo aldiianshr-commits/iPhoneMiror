@@ -190,8 +190,8 @@ public sealed class WdaClient : IAsyncDisposable
         if (!response.IsSuccessStatusCode || error is not null)
         {
             var message = value is JsonObject mo ? mo["message"]?.GetValue<string>() : null;
-            throw new WdaException(string.Create(CultureInfo.InvariantCulture,
-                $"WebDriverAgent {what} failed: HTTP {(int)response.StatusCode} {error} {message}".Trim()), error);
+            var text = string.Create(CultureInfo.InvariantCulture, $"WebDriverAgent {what} failed: HTTP {(int)response.StatusCode} {error} {message}");
+            throw new WdaException(text.Trim(), error);
         }
         return root;
     }

@@ -43,10 +43,10 @@ public sealed class DnsMessage
         BinaryPrimitives.WriteUInt16BigEndian(header[2..], (ushort)(IsResponse ? 0x8400 : 0));
         BinaryPrimitives.WriteUInt16BigEndian(header[4..], (ushort)Questions.Count);
         ms.Write(header);
+        Span<byte> tail = stackalloc byte[4];
         foreach (var q in Questions)
         {
             WriteName(ms, q.Name);
-            Span<byte> tail = stackalloc byte[4];
             BinaryPrimitives.WriteUInt16BigEndian(tail, (ushort)q.Type);
             BinaryPrimitives.WriteUInt16BigEndian(tail[2..], (ushort)(q.UnicastResponse ? 0x8001 : 0x0001));
             ms.Write(tail);

@@ -55,20 +55,28 @@ public class LockdownAndPairingTests
         // Device certificate carries the device's own public key.
         Assert.Equal(deviceKey.ExportRSAPublicKey(), device.GetRSAPublicKey()!.ExportRSAPublicKey());
 
-        // Host and device certificates verify against the root signature.
-        foreach (var leaf in new[] { host, device })
+        // Host and device certificates are signed by the root key; root is self-signed.
+        // (Verified directly: the empty subject/issuer names, as issued by libimobiledevice, defeat name-based chain building.)
+        using var rootKey = root.GetRSAPublicKey()!;
+        foreach (var cert in new[] { root, host, device })
         {
-            using var chain = new X509Chain();
-            chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
-            chain.ChainPolicy.CustomTrustStore.Add(root);
-            chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
-            chain.ChainPolicy.VerificationFlags = X509VerificationFlags.IgnoreWrongUsage;
-            Assert.True(chain.Build(leaf), string.Join("; ", chain.ChainStatus.Select(s => s.StatusInformation)));
+            Assert.True(SignedBy(cert, rootKey), "certificate signature does not verify with the root key");
         }
+        Assert.False(SignedBy(host, deviceKey));
 
         Assert.True((root.NotAfter - root.NotBefore).TotalDays > 3600);
         Assert.Equal(36, record.HostId.Length);
         Assert.Equal("SYSTEM-BUID-1", record.SystemBuid);
+    }
+
+    private static bool SignedBy(X509Certificate2 cert, RSA key)
+    {
+        var reader = new System.Formats.Asn1.AsnReader(cert.RawData, System.Formats.Asn1.AsnEncodingRules.DER);
+        var seq = reader.ReadSequence();
+        var tbs = seq.ReadEncodedValue();
+        seq.ReadSequence(); // signatureAlgorithm
+        var signature = seq.ReadBitString(out _);
+        return key.VerifyData(tbs.Span, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
     }
 
     [Fact]
